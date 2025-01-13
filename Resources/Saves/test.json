@@ -1,0 +1,38 @@
+{
+	"0": {
+		"Gas1": "72",
+		"Gas2": "90",
+		"Pressure": "03",
+		"Radiation": "84",
+		"Temperature": "29"
+	},
+	"1": {
+		"Gas1": "04",
+		"Gas2": "32",
+		"Pressure": "98",
+		"Radiation": "12",
+		"Temperature": "35"
+	},
+	"2": {
+		"Gas1": "94",
+		"Gas2": "29",
+		"Pressure": "12",
+		"Radiation": "23",
+		"Temperature": "37"
+	},
+	"3": {
+		"Gas1": "34",
+		"Gas2": "18",
+		"Pressure": "26",
+		"Radiation": "87",
+		"Temperature": "15"
+	},
+	"4": {
+		"Gas1": "10",
+		"Gas2": "43",
+		"Pressure": "38",
+		"Radiation": "59",
+		"Temperature": "29"
+	},
+	"size": "4"
+}

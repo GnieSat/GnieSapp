@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7rap1avjeir7"]
+
+[ext_resource type="PackedScene" uid="uid://sihegnjhkdoa" path="res://Panels/StatPanel.tscn" id="1_y1fu4"]
+[ext_resource type="PackedScene" uid="uid://dvtj3m146qc5k" path="res://Panels/MapViewPort.tscn" id="3_hv4pp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhale"]
+size = Vector2(1485, 177)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lx6pk"]
+size = Vector2(238, 948)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Borders" type="Node" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders"]
+position = Vector2(568.5, -202)
+shape = SubResource("RectangleShape2D_qhale")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders"]
+position = Vector2(-293, 306)
+shape = SubResource("RectangleShape2D_lx6pk")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Borders"]
+position = Vector2(567, 845)
+shape = SubResource("RectangleShape2D_qhale")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders"]
+position = Vector2(1430, 333)
+shape = SubResource("RectangleShape2D_lx6pk")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -10.0
+offset_top = -1.0
+offset_right = 1260.0
+offset_bottom = 712.0
+stretch = true
+
+[node name="MapViewport" parent="SubViewportContainer" instance=ExtResource("3_hv4pp")]
+handle_input_locally = false
+size = Vector2i(1270, 713)
+render_target_update_mode = 4
+
+[node name="StatPanel" parent="." instance=ExtResource("1_y1fu4")]
+position = Vector2(942, 619)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(630, 356)
+zoom = Vector2(1.515, 1.515)

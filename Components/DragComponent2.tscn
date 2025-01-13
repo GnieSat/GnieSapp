@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciqwminnxrcye"]
+
+[ext_resource type="Script" path="res://GDS/drag_component_2.gd" id="1_88b05"]
+
+[node name="DragComponent2" type="Button"]
+offset_top = -1.0
+offset_right = 123.0
+offset_bottom = 43.0
+script = ExtResource("1_88b05")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

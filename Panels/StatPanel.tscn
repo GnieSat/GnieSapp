@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://sihegnjhkdoa"]
+
+[ext_resource type="Script" path="res://GDS/stat_panel.gd" id="1_wtmpy"]
+[ext_resource type="PackedScene" uid="uid://ciqwminnxrcye" path="res://Components/DragComponent2.tscn" id="2_3m6cf"]
+[ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="2_6s1v3"]
+[ext_resource type="PackedScene" uid="uid://b5plp8bouknsx" path="res://Components/ArduinoReader.tscn" id="3_tk0wr"]
+[ext_resource type="PackedScene" uid="uid://bebvflxa8dens" path="res://Components/StatDoubleBox.tscn" id="4_48ucf"]
+[ext_resource type="Resource" uid="uid://b3nu4onbkdpk0" path="res://Resources/Stats/DataSource.tres" id="5_t2yaw"]
+[ext_resource type="PackedScene" uid="uid://lmxnr6tn7k10" path="res://Components/json_handle.tscn" id="6_mygmc"]
+[ext_resource type="Texture2D" uid="uid://bd86qluse2j6o" path="res://Resources/Textures/Pointer.png" id="8_6kh7g"]
+[ext_resource type="PackedScene" uid="uid://r6i6w7yauut5" path="res://Components/data_chart.tscn" id="8_coi6w"]
+[ext_resource type="PackedScene" uid="uid://bhuwwjnnotsr1" path="res://Panels/option_panel.tscn" id="10_42lye"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qdrmr"]
+
+[node name="StatPanel" type="Node2D"]
+scale = Vector2(0.715, 0.715)
+script = ExtResource("1_wtmpy")
+
+[node name="DragComponent2" parent="." instance=ExtResource("2_3m6cf")]
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 822.0
+offset_bottom = 236.0
+SCALE_FACTOR = Vector2(0.715, 0.715)
+
+[node name="TitleBox" type="Sprite2D" parent="DragComponent2"]
+position = Vector2(411.402, 117.913)
+scale = Vector2(0.657123, 0.479589)
+texture = ExtResource("2_6s1v3")
+
+[node name="Temperature" parent="DragComponent2" instance=ExtResource("4_48ucf")]
+position = Vector2(82.0892, 19.1313)
+VSource = ExtResource("5_t2yaw")
+Name = "Temperature"
+UnitName = "C"
+
+[node name="Pressure" parent="DragComponent2" instance=ExtResource("4_48ucf")]
+position = Vector2(247.089, 19.1313)
+VSource = ExtResource("5_t2yaw")
+Name = "Pressure"
+UnitName = "Pa"
+
+[node name="Radiation" parent="DragComponent2" instance=ExtResource("4_48ucf")]
+position = Vector2(412.089, 19.1313)
+VSource = ExtResource("5_t2yaw")
+Name = "Radiation"
+UnitName = "uSv"
+
+[node name="Gas1" parent="DragComponent2" instance=ExtResource("4_48ucf")]
+position = Vector2(577.089, 19.1313)
+VSource = ExtResource("5_t2yaw")
+Name = "Gas1"
+UnitName = "%"
+
+[node name="Gas2" parent="DragComponent2" instance=ExtResource("4_48ucf")]
+position = Vector2(740.089, 19.1313)
+VSource = ExtResource("5_t2yaw")
+Name = "Gas2"
+UnitName = "%"
+
+[node name="ArduinoReader" parent="DragComponent2" instance=ExtResource("3_tk0wr")]
+modulate = Color(0.762404, 0.762404, 0.762404, 1)
+position = Vector2(4.08922, 193.131)
+
+[node name="OptionPanel" parent="DragComponent2" instance=ExtResource("10_42lye")]
+position = Vector2(154.831, 342.784)
+
+[node name="Chart" type="Node2D" parent="DragComponent2"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="DragComponent2/Chart"]
+anchors_preset = -1
+anchor_left = 0.499392
+anchor_top = 0.493617
+anchor_right = 0.499392
+anchor_bottom = 0.493617
+offset_left = 23.0
+offset_top = 75.0
+offset_right = 811.0
+offset_bottom = 178.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="DragComponent2/Chart/SubViewportContainer"]
+handle_input_locally = false
+gui_disable_input = true
+size = Vector2i(788, 103)
+size_2d_override = Vector2i(1135, 80)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="DataChart" parent="DragComponent2/Chart/SubViewportContainer/SubViewport" instance=ExtResource("8_coi6w")]
+scale = Vector2(9.09, 9.09)
+
+[node name="Camera2D" type="Camera2D" parent="DragComponent2/Chart/SubViewportContainer/SubViewport"]
+position = Vector2(7626, 1306)
+offset = Vector2(-14.98, -158.195)
+zoom = Vector2(0.085, 0.098)
+
+[node name="DataSlider" type="HSlider" parent="DragComponent2/Chart"]
+anchors_preset = -1
+anchor_left = 0.503038
+anchor_top = 0.497872
+anchor_right = 0.503038
+anchor_bottom = 0.497872
+offset_left = 813.0
+offset_top = 70.0
+offset_right = 1554.0
+offset_bottom = 191.0
+scale = Vector2(-1, 1)
+size_flags_vertical = 8
+theme_override_icons/grabber = ExtResource("8_6kh7g")
+theme_override_icons/grabber_highlight = ExtResource("8_6kh7g")
+theme_override_icons/grabber_disabled = ExtResource("8_6kh7g")
+theme_override_icons/tick = ExtResource("8_6kh7g")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_qdrmr")
+max_value = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="JsonHandle" parent="." instance=ExtResource("6_mygmc")]
+position = Vector2(-1, 1)
+
+[connection signal="OnUpdate" from="DragComponent2/ArduinoReader" to="." method="_on_arduino_reader_on_update"]
+[connection signal="changed" from="DragComponent2/Chart/DataSlider" to="." method="_on_data_slider_changed"]
+[connection signal="value_changed" from="DragComponent2/Chart/DataSlider" to="." method="_on_data_slider_value_changed"]
+[connection signal="start_load" from="JsonHandle" to="." method="_on_json_handle_start_load"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvtj3m146qc5k"]
+
+[ext_resource type="PackedScene" uid="uid://vu0kqsgqdtnm" path="res://Panels/map.tscn" id="1_vqxrl"]
+
+[node name="MapViewport" type="SubViewport"]
+
+[node name="Map" parent="." instance=ExtResource("1_vqxrl")]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://vxlhhsm51k8e"]
+
+[ext_resource type="Script" path="res://GDS/movement_node.gd" id="1_t1ra5"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_t1ra5")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

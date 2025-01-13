@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1qhrl0lkybs"]
+
+[ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/button.tscn" id="1_tnwxd"]
+[ext_resource type="Script" path="res://GDS/path_button.gd" id="2_pfbui"]
+
+[node name="Button" instance=ExtResource("1_tnwxd")]
+script = ExtResource("2_pfbui")
+Name = "[center]Change File[/center]"
+
+[node name="RichTextLabel" parent="." index="1"]
+text = "[center]Change[/center]"
+
+[node name="FileDialog" type="FileDialog" parent="." index="2"]
+title = "Open a File"
+size = Vector2i(558, 455)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+
+[node name="PathNameButton" parent="." index="3" instance=ExtResource("1_tnwxd")]
+position = Vector2(89, 45.835)
+rotation = -1.5708
+scale = Vector2(0.525, 0.38)
+Name = "[center]...[/center]"
+
+[node name="RichTextLabel" parent="PathNameButton" index="1"]
+offset_left = -89.8381
+offset_top = -34.2105
+offset_right = -10.9281
+offset_bottom = -0.850529
+scale = Vector2(3.43, 3.43)
+text = "[center]...[/center]"
+
+[node name="PathName" type="RichTextLabel" parent="." index="4"]
+offset_left = 109.0
+offset_top = 12.0
+offset_right = 109.0
+offset_bottom = 39.0
+text = "res://Resources/Saves/test.json"
+scroll_active = false
+autowrap_mode = 0
+
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="on_pressed" from="PathNameButton" to="." method="_on_path_name_button_on_pressed"]
+
+[editable path="PathNameButton"]

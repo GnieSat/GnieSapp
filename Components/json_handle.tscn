@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lmxnr6tn7k10"]
+
+[ext_resource type="Script" path="res://GDS/json_handle.gd" id="1_y4whl"]
+
+[node name="JsonHandle" type="Node2D"]
+script = ExtResource("1_y4whl")

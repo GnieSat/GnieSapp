@@ -1,0 +1,20 @@
+config_version=5
+
+[application]
+
+config/name="GnieSapp"
+run/main_scene="res://Screen.tscn"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1904
+window/size/viewport_height=1071
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
+
+[dotnet]
+
+project/assembly_name="GnieSatApp"

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://r6i6w7yauut5"]
+
+[ext_resource type="PackedScene" uid="uid://g5mbv8vgiukj" path="res://Components/Chart.tscn" id="1_xb717"]
+
+[node name="DataChart" type="Node2D"]
+
+[node name="Control2" parent="." instance=ExtResource("1_xb717")]
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_right = 1600.0
+offset_bottom = 233.0
+grow_vertical = 1

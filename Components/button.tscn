@@ -11,16 +11,15 @@ Name = "[center]Start[/center]"
 [node name="Button" type="TextureButton" parent="."]
 offset_right = 1253.0
 offset_bottom = 493.0
-scale = Vector2(0.068, 0.095)
+scale = Vector2(0.06, 0.06)
 texture_normal = ExtResource("1_d2vah")
 texture_pressed = ExtResource("2_os1wf")
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 3.0
-offset_top = 11.0
-offset_right = 81.48
-offset_bottom = 44.36
+offset_left = -2.0
+offset_right = 76.48
+offset_bottom = 33.36
 mouse_filter = 2
 theme_override_colors/table_border = Color(0, 0, 0, 1)
 theme_override_font_sizes/bold_italics_font_size = 80

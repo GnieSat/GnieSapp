@@ -1,26 +1,106 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhuwwjnnotsr1"]
+[gd_scene load_steps=8 format=3 uid="uid://bhuwwjnnotsr1"]
 
 [ext_resource type="Script" path="res://GDS/option_panel.gd" id="1_dwjtj"]
 [ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="3_r7p21"]
 [ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/button.tscn" id="4_uo2hb"]
 [ext_resource type="PackedScene" uid="uid://b1qhrl0lkybs" path="res://Components/path_button.tscn" id="5_b15or"]
 
+[sub_resource type="Animation" id="Animation_m0gws"]
+resource_name = "Extend"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TabContainer/Active/ButtonStart:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 4), Vector2(4, 168), Vector2(31, 168)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TabContainer/Active/ButtonStop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 86), Vector2(4, 168), Vector2(58, 168)]
+}
+
+[sub_resource type="Animation" id="Animation_nj5sh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TabContainer/Active/ButtonStart:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TabContainer/Active/ButtonStop:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 86)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sc2l"]
+_data = {
+"Extend": SubResource("Animation_m0gws"),
+"RESET": SubResource("Animation_nj5sh")
+}
+
 [node name="OptionPanel" type="Node2D"]
 script = ExtResource("1_dwjtj")
 
 [node name="TitleBox" type="Sprite2D" parent="."]
-position = Vector2(256.5, -46.5)
-scale = Vector2(0.656824, 0.246)
+position = Vector2(256.5, -104.431)
+scale = Vector2(0.656824, 0.481012)
 texture = ExtResource("3_r7p21")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_left = -155.0
-offset_top = -108.0
+offset_top = -222.0
 offset_right = 166.0
-offset_bottom = 46.0
+offset_bottom = 45.0
 mouse_filter = 2
 current_tab = 0
 tabs_position = 1
+
+[node name="ExtendButton" parent="TabContainer" instance=ExtResource("4_uo2hb")]
+position = Vector2(4, 123)
+Name = "[center]->[/center]"
+
+[node name="Button" parent="TabContainer/ExtendButton" index="0"]
+offset_left = 0.270279
+offset_top = 45.0002
+offset_right = 1256.5
+offset_bottom = 538.0
+scale = Vector2(0.02, 0.127)
+
+[node name="RichTextLabel" parent="TabContainer/ExtendButton" index="1"]
+offset_left = 24.2703
+offset_top = 41.0001
+offset_right = 99.2653
+offset_bottom = 65.2701
+rotation = 1.5708
+text = "[center]->[/center]"
 
 [node name="Active" type="TabBar" parent="TabContainer"]
 layout_mode = 2
@@ -28,15 +108,38 @@ mouse_filter = 2
 tab_alignment = 1
 metadata/_tab_index = 0
 
-[node name="ButtonStart" parent="TabContainer/Active" instance=ExtResource("4_uo2hb")]
-position = Vector2(5, 13)
+[node name="Button" parent="TabContainer/Active" instance=ExtResource("5_b15or")]
+position = Vector2(85, 168)
 
 [node name="ButtonStop" parent="TabContainer/Active" instance=ExtResource("4_uo2hb")]
-position = Vector2(100, 13)
-Name = "[center]Stop[/center]"
+position = Vector2(4, 86)
+Name = "[center]||[/center]"
 
-[node name="Button" parent="TabContainer/Active" instance=ExtResource("5_b15or")]
-position = Vector2(5, 69)
+[node name="Button" parent="TabContainer/Active/ButtonStop" index="0"]
+scale = Vector2(0.02, 0.127)
+
+[node name="RichTextLabel" parent="TabContainer/Active/ButtonStop" index="1"]
+offset_left = -26.0
+offset_top = 17.0
+offset_right = 52.48
+offset_bottom = 50.36
+text = "[center]||[/center]"
+
+[node name="ButtonStart" parent="TabContainer/Active" instance=ExtResource("4_uo2hb")]
+position = Vector2(4, 4)
+Name = "[center]Δ[/center]"
+
+[node name="Button" parent="TabContainer/Active/ButtonStart" index="0"]
+offset_right = 1255.16
+scale = Vector2(0.02, 0.127)
+
+[node name="RichTextLabel" parent="TabContainer/Active/ButtonStart" index="1"]
+offset_left = 26.0
+offset_top = -8.0
+offset_right = 104.48
+offset_bottom = 25.36
+rotation = 1.5708
+text = "[center]Δ[/center]"
 
 [node name="Analyze" type="TabBar" parent="TabContainer"]
 visible = false
@@ -46,14 +149,24 @@ tab_alignment = 1
 metadata/_tab_index = 1
 
 [node name="ButtonLoad" parent="TabContainer/Analyze" instance=ExtResource("4_uo2hb")]
-position = Vector2(5, 13)
+position = Vector2(4, 4)
 Name = "[center]Read[/center]"
 
 [node name="Button" parent="TabContainer/Analyze" instance=ExtResource("5_b15or")]
-position = Vector2(5, 69)
+position = Vector2(83, 4)
 
-[connection signal="on_pressed" from="TabContainer/Active/ButtonStart" to="." method="_on_button_on_pressed"]
-[connection signal="on_pressed" from="TabContainer/Active/ButtonStop" to="." method="_on_button_2_on_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8sc2l")
+}
+
+[connection signal="on_pressed" from="TabContainer/ExtendButton" to="." method="_on_extend_button_on_pressed"]
 [connection signal="save" from="TabContainer/Active/Button" to="." method="_on_buttonSave_save"]
+[connection signal="on_pressed" from="TabContainer/Active/ButtonStop" to="." method="_on_button_2_on_pressed"]
+[connection signal="on_pressed" from="TabContainer/Active/ButtonStart" to="." method="_on_button_on_pressed"]
 [connection signal="on_pressed" from="TabContainer/Analyze/ButtonLoad" to="." method="_on_button_load_on_pressed"]
 [connection signal="save" from="TabContainer/Analyze/Button" to="." method="_on_buttonLoad_save"]
+
+[editable path="TabContainer/ExtendButton"]
+[editable path="TabContainer/Active/ButtonStop"]
+[editable path="TabContainer/Active/ButtonStart"]

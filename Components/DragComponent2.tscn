@@ -5,7 +5,7 @@
 [node name="DragComponent2" type="Button"]
 offset_top = -1.0
 offset_right = 123.0
-offset_bottom = 43.0
+offset_bottom = 34.0
 script = ExtResource("1_88b05")
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

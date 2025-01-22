@@ -42,7 +42,7 @@ size = Vector2i(1270, 713)
 render_target_update_mode = 4
 
 [node name="StatPanel" parent="." instance=ExtResource("1_y1fu4")]
-position = Vector2(942, 619)
+position = Vector2(655, 443)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(630, 356)

@@ -10,6 +10,10 @@ signal load
 signal pathsave(path : String)
 signal pathload(path : String)
 
+signal maximize
+signal minimize
+var is_maximized = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -36,3 +40,16 @@ func _on_buttonSave_save(path: String) -> void:
 
 func _on_buttonLoad_save(path: String) -> void:
 	pathload.emit(path)
+
+
+func _on_extend_button_on_pressed() -> void:
+	if is_maximized:
+		minimize.emit()
+		is_maximized = false
+		$TabContainer/ExtendButton/RichTextLabel.text = "[center]->[/center]"
+		$AnimationPlayer.play_backwards("Extend")
+	else:
+		maximize.emit()
+		is_maximized = true
+		$TabContainer/ExtendButton/RichTextLabel.text = "[center]<-[/center]"
+		$AnimationPlayer.play("Extend")

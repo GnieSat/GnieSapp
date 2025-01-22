@@ -8,6 +8,8 @@ script = ExtResource("2_pfbui")
 Name = "[center]Change File[/center]"
 
 [node name="RichTextLabel" parent="." index="1"]
+offset_top = 1.0
+offset_bottom = 34.36
 text = "[center]Change[/center]"
 
 [node name="FileDialog" type="FileDialog" parent="." index="2"]
@@ -24,11 +26,18 @@ rotation = -1.5708
 scale = Vector2(0.525, 0.38)
 Name = "[center]...[/center]"
 
+[node name="Button" parent="PathNameButton" index="0"]
+offset_left = 30.98
+offset_top = -30.665
+offset_right = 1283.98
+offset_bottom = 462.335
+scale = Vector2(0.045, 0.085)
+
 [node name="RichTextLabel" parent="PathNameButton" index="1"]
-offset_left = -89.8381
-offset_top = -34.2105
-offset_right = -10.9281
-offset_bottom = -0.850529
+offset_left = -74.5998
+offset_top = -68.4214
+offset_right = 4.31017
+offset_bottom = -35.0615
 scale = Vector2(3.43, 3.43)
 text = "[center]...[/center]"
 

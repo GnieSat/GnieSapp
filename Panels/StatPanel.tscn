@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://sihegnjhkdoa"]
+[gd_scene load_steps=31 format=3 uid="uid://sihegnjhkdoa"]
 
 [ext_resource type="Script" path="res://GDS/stat_panel.gd" id="1_wtmpy"]
 [ext_resource type="PackedScene" uid="uid://ciqwminnxrcye" path="res://Components/DragComponent2.tscn" id="2_3m6cf"]
 [ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="2_6s1v3"]
 [ext_resource type="PackedScene" uid="uid://b5plp8bouknsx" path="res://Components/ArduinoReader.tscn" id="3_tk0wr"]
 [ext_resource type="PackedScene" uid="uid://bebvflxa8dens" path="res://Components/StatDoubleBox.tscn" id="4_48ucf"]
+[ext_resource type="Script" path="res://twojamama.gd" id="4_ob536"]
 [ext_resource type="Resource" uid="uid://b3nu4onbkdpk0" path="res://Resources/Stats/DataSource.tres" id="5_t2yaw"]
 [ext_resource type="PackedScene" uid="uid://lmxnr6tn7k10" path="res://Components/json_handle.tscn" id="6_mygmc"]
 [ext_resource type="Texture2D" uid="uid://bd86qluse2j6o" path="res://Resources/Textures/Pointer.png" id="8_6kh7g"]
@@ -43,6 +44,12 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s5gl1"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3fj8"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7rg6q"]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fylm3"]
 states/Extend/node = SubResource("AnimationNodeAnimation_cpuh2")
 states/Extend/position = Vector2(681, 70)
@@ -53,7 +60,7 @@ states/PopOut/position = Vector2(424, 70)
 "states/PopOut BW/node" = SubResource("AnimationNodeAnimation_1qco5")
 "states/PopOut BW/position" = Vector2(424, 157)
 states/Start/position = Vector2(226, 95)
-transitions = ["PopOut BW", "PopOut", SubResource("AnimationNodeStateMachineTransition_qckwt"), "PopOut", "Extend", SubResource("AnimationNodeStateMachineTransition_3yi04"), "Extend", "Extend BW", SubResource("AnimationNodeStateMachineTransition_y0qgo"), "Extend BW", "PopOut BW", SubResource("AnimationNodeStateMachineTransition_t85ot"), "Start", "PopOut", SubResource("AnimationNodeStateMachineTransition_jcrva"), "PopOut", "PopOut BW", SubResource("AnimationNodeStateMachineTransition_s5gl1")]
+transitions = ["PopOut BW", "PopOut", SubResource("AnimationNodeStateMachineTransition_qckwt"), "PopOut", "Extend", SubResource("AnimationNodeStateMachineTransition_3yi04"), "Extend", "Extend BW", SubResource("AnimationNodeStateMachineTransition_y0qgo"), "Extend BW", "PopOut BW", SubResource("AnimationNodeStateMachineTransition_t85ot"), "Start", "PopOut", SubResource("AnimationNodeStateMachineTransition_jcrva"), "PopOut", "PopOut BW", SubResource("AnimationNodeStateMachineTransition_s5gl1"), "Extend BW", "Extend", SubResource("AnimationNodeStateMachineTransition_c3fj8"), "Extend BW", "PopOut", SubResource("AnimationNodeStateMachineTransition_7rg6q")]
 
 [sub_resource type="Animation" id="Animation_weviv"]
 resource_name = "Extend"
@@ -80,7 +87,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(823, 236), Vector2(792, 310)]
+"values": [Vector2(823, 236), Vector2(824, 310)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -93,6 +100,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-0.71, 0.705), Vector2(-0.71, 0.718)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../DragComponent2/Area2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.038, 1), Vector2(0.999, 1.3)]
 }
 
 [sub_resource type="Animation" id="Animation_14txr"]
@@ -120,7 +139,19 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(823, 236), Vector2(829, 236)]
+"values": [Vector2(823, 236), Vector2(857, 236)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DragComponent2/Area2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.999, 1), Vector2(1.039, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tx2s3"]
@@ -135,7 +166,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(122.301, 221.403)]
+"values": [Vector2(154.846, 221.403)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -160,6 +191,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-0.71, 0.705)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../DragComponent2/Area2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.999, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3erw1"]
@@ -201,8 +244,12 @@ scale = Vector2(-1, 1)
 SCALE_FACTOR = Vector2(-0.71, 0.705)
 
 [node name="Area2D" type="Area2D" parent="DragComponent2"]
+position = Vector2(1, 0)
+scale = Vector2(0.999, 1)
+monitorable = false
+script = ExtResource("4_ob536")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DragComponent2/Area2D"]
+[node name="MainCol" type="CollisionShape2D" parent="DragComponent2/Area2D"]
 position = Vector2(411.888, 118.881)
 shape = SubResource("RectangleShape2D_uvvf0")
 
@@ -212,7 +259,7 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 
 [node name="OptionPanel" parent="DragComponent2/Node" instance=ExtResource("10_42lye")]
-position = Vector2(122.301, 221.403)
+position = Vector2(154.846, 221.403)
 
 [node name="Container" type="Container" parent="DragComponent2/Node"]
 offset_right = 823.0
@@ -308,6 +355,7 @@ max_value = 0.0
 metadata/_edit_use_anchors_ = true
 
 [connection signal="start_load" from="JsonHandle" to="." method="_on_json_handle_start_load"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="focus_entered" from="DragComponent2" to="." method="_on_drag_component_2_focus_entered"]
 [connection signal="focus_exited" from="DragComponent2" to="." method="_on_drag_component_2_focus_exited"]
 [connection signal="mouse_entered" from="DragComponent2/Area2D" to="." method="_on_area_2d_mouse_entered"]

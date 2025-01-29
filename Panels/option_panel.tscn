@@ -148,12 +148,23 @@ mouse_filter = 2
 tab_alignment = 1
 metadata/_tab_index = 1
 
-[node name="ButtonLoad" parent="TabContainer/Analyze" instance=ExtResource("4_uo2hb")]
-position = Vector2(4, 4)
-Name = "[center]Read[/center]"
-
 [node name="Button" parent="TabContainer/Analyze" instance=ExtResource("5_b15or")]
-position = Vector2(83, 4)
+position = Vector2(120, 170)
+
+[node name="ButtonLoad" parent="TabContainer/Analyze" instance=ExtResource("4_uo2hb")]
+position = Vector2(4, 86)
+Name = "[center]Δ[/center]"
+
+[node name="Button" parent="TabContainer/Analyze/ButtonLoad" index="0"]
+scale = Vector2(0.02, 0.127)
+
+[node name="RichTextLabel" parent="TabContainer/Analyze/ButtonLoad" index="1"]
+offset_left = 26.0
+offset_top = -7.0
+offset_right = 104.48
+offset_bottom = 26.36
+rotation = 1.5708
+text = "[center]Δ[/center]"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -164,9 +175,10 @@ libraries = {
 [connection signal="save" from="TabContainer/Active/Button" to="." method="_on_buttonSave_save"]
 [connection signal="on_pressed" from="TabContainer/Active/ButtonStop" to="." method="_on_button_2_on_pressed"]
 [connection signal="on_pressed" from="TabContainer/Active/ButtonStart" to="." method="_on_button_on_pressed"]
-[connection signal="on_pressed" from="TabContainer/Analyze/ButtonLoad" to="." method="_on_button_load_on_pressed"]
 [connection signal="save" from="TabContainer/Analyze/Button" to="." method="_on_buttonLoad_save"]
+[connection signal="on_pressed" from="TabContainer/Analyze/ButtonLoad" to="." method="_on_button_load_on_pressed"]
 
 [editable path="TabContainer/ExtendButton"]
 [editable path="TabContainer/Active/ButtonStop"]
 [editable path="TabContainer/Active/ButtonStart"]
+[editable path="TabContainer/Analyze/ButtonLoad"]

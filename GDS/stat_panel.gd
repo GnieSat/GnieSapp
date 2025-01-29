@@ -3,6 +3,7 @@ extends Node2D
 var counter : int = 0;
 var last_OptionPanelPos : Vector2 = Vector2(0,0) 
 var mouse_entered : bool = false
+var has_focus : bool = false
 
 @onready var state_machine = $AnimationTree.get("parameters/playback")
 
@@ -112,17 +113,22 @@ func _on_option_panel_maximize() -> void:
 
 func _on_option_panel_minimize() -> void:
 	if mouse_entered:
-		state_machine.travel("Extend BW")
+		if not has_focus:
+			state_machine.travel("PopOut BW")
+		else:
+			state_machine.travel("Extend BW")
 
 
 func _on_drag_component_2_focus_entered() -> void:
-	if not $DragComponent2/Node/OptionPanel.is_maximized and mouse_entered:
+	if not $DragComponent2/Node/OptionPanel.is_maximized:
 		state_machine.travel("PopOut")
+	has_focus = true
 
 
 func _on_drag_component_2_focus_exited() -> void:
-	if not $DragComponent2/Node/OptionPanel.is_maximized and mouse_entered:
+	if not $DragComponent2/Node/OptionPanel.is_maximized and not mouse_entered:
 		state_machine.travel("PopOut BW")
+	has_focus = false
 
 
 func _on_area_2d_mouse_entered() -> void:

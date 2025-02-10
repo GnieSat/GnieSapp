@@ -29,7 +29,6 @@ https://godotengine.org/asset-library/asset/421
 This plugin is at licence LGPLv3
 https://www.gnu.org/licenses/lgpl-3.0.html.
 
-
 Satelite Imagery with Google Earth Engine:
 https://github.com/st-howard/blog-notebooks
 https://colab.research.google.com/github/st-howard/blog-notebooks/blob/main/Google_Earth_Engine/Satellite%20Imagery%20with%20Google%20Earth%20Engine.ipynb

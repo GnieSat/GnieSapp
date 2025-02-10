@@ -70,8 +70,8 @@ _data = {
 script = ExtResource("1_dwjtj")
 
 [node name="TitleBox" type="Sprite2D" parent="."]
-position = Vector2(256.5, -104.431)
-scale = Vector2(0.656824, 0.481012)
+position = Vector2(334.5, -104.431)
+scale = Vector2(0.781325, 0.481012)
 texture = ExtResource("3_r7p21")
 
 [node name="TabContainer" type="TabContainer" parent="."]

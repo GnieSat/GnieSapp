@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://caxnk7kv5g7wk"]
+
+[ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/button.tscn" id="1_5ycwv"]
+[ext_resource type="Script" path="res://GDS/buttontext.gd" id="2_q6dyc"]
+[ext_resource type="Texture2D" uid="uid://dpi4yx3uld01q" path="res://Resources/Textures/Change.png" id="2_ss85q"]
+
+[node name="Button" instance=ExtResource("1_5ycwv")]
+script = ExtResource("2_q6dyc")
+Name = "[center][/center]"
+
+[node name="Button" parent="." index="0"]
+scale = Vector2(0.028, 0.06)
+
+[node name="RichTextLabel" parent="." index="1"]
+offset_top = 2.0
+offset_right = 46.525
+offset_bottom = 28.22
+text = "[center][/center]"
+
+[node name="TextEdit" type="TextEdit" parent="." index="2"]
+offset_left = -59.0
+offset_top = -3.0
+offset_right = -1.0
+offset_bottom = 32.0
+
+[node name="Change" type="Sprite2D" parent="." index="3"]
+position = Vector2(17, 15)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_ss85q")
+
+[connection signal="on_pressed" from="." to="." method="_on_on_pressed"]

@@ -3,35 +3,40 @@
 [ext_resource type="Script" path="res://GDS/stat_double_box.gd" id="1_540c8"]
 [ext_resource type="Texture2D" uid="uid://ba3dto7xgtrls" path="res://Resources/Textures/statBlock.png" id="1_xq2nn"]
 
-[node name="StatDoubleBox" type="Node2D"]
+[node name="StatDoubleBox" type="Button"]
+offset_right = 166.0
+offset_bottom = 64.0
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_540c8")
 
 [node name="StatBlock2" type="Sprite2D" parent="."]
 modulate = Color(0.847917, 0.888971, 0.921844, 1)
-position = Vector2(0, 28)
+position = Vector2(82.9998, 47.625)
 scale = Vector2(0.136635, 0.0692567)
 texture = ExtResource("1_xq2nn")
 
 [node name="StatBlock" type="Sprite2D" parent="."]
-position = Vector2(0, -2.3125)
+position = Vector2(82.9998, 17.3125)
 scale = Vector2(0.136635, 0.0773649)
 texture = ExtResource("1_xq2nn")
 
 [node name="Title" type="RichTextLabel" parent="."]
 modulate = Color(0, 0, 0, 1)
-offset_left = -77.0
-offset_top = -14.0
-offset_right = 76.0
-offset_bottom = 9.0
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 159.0
+offset_bottom = 30.0
 mouse_filter = 2
 text = "Title"
 
 [node name="Value" type="RichTextLabel" parent="."]
 modulate = Color(0, 0, 0, 1)
-offset_left = -77.0
-offset_top = 15.0
-offset_right = 76.0
-offset_bottom = 43.0
+layout_mode = 0
+offset_left = 5.99979
+offset_top = 34.625
+offset_right = 159.0
+offset_bottom = 62.625
 mouse_filter = 2
 theme_override_colors/table_border = Color(0, 0, 0, 1)
 text = "Value"

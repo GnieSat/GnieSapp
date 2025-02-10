@@ -1,9 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "A:\\programowanie\\Godot\\gniesatapp\\",
+  "WorkspaceRootPath": "W:\\kitus\\Documents\\GitHub\\GnieSapp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0E9EC52F-272F-48AA-982F-A88D8E93C619}|GnieSatApp.csproj|a:\\programowanie\\godot\\gniesatapp\\cs\\portreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0E9EC52F-272F-48AA-982F-A88D8E93C619}|GnieSatApp.csproj|w:\\kitus\\documents\\github\\gniesapp\\cs\\maptilecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0E9EC52F-272F-48AA-982F-A88D8E93C619}|GnieSatApp.csproj|solutionrelative:cs\\maptilecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E9EC52F-272F-48AA-982F-A88D8E93C619}|GnieSatApp.csproj|w:\\kitus\\documents\\github\\gniesapp\\cs\\portreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0E9EC52F-272F-48AA-982F-A88D8E93C619}|GnieSatApp.csproj|solutionrelative:cs\\portreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -47,12 +51,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MapTileCalculator.cs",
+              "DocumentMoniker": "W:\\kitus\\Documents\\GitHub\\GnieSapp\\CS\\MapTileCalculator.cs",
+              "RelativeDocumentMoniker": "CS\\MapTileCalculator.cs",
+              "ToolTip": "W:\\kitus\\Documents\\GitHub\\GnieSapp\\CS\\MapTileCalculator.cs",
+              "RelativeToolTip": "CS\\MapTileCalculator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T19:32:00.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "PortReader.cs",
-              "DocumentMoniker": "A:\\programowanie\\Godot\\gniesatapp\\CS\\PortReader.cs",
+              "DocumentMoniker": "W:\\kitus\\Documents\\GitHub\\GnieSapp\\CS\\PortReader.cs",
               "RelativeDocumentMoniker": "CS\\PortReader.cs",
-              "ToolTip": "A:\\programowanie\\Godot\\gniesatapp\\CS\\PortReader.cs",
+              "ToolTip": "W:\\kitus\\Documents\\GitHub\\GnieSapp\\CS\\PortReader.cs",
               "RelativeToolTip": "CS\\PortReader.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAgwDQAAAAAAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAQwFMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T14:00:34.781Z",
               "EditorCaption": ""

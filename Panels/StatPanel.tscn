@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="2_6s1v3"]
 [ext_resource type="PackedScene" uid="uid://b5plp8bouknsx" path="res://Components/ArduinoReader.tscn" id="3_tk0wr"]
 [ext_resource type="PackedScene" uid="uid://bebvflxa8dens" path="res://Components/StatDoubleBox.tscn" id="4_48ucf"]
-[ext_resource type="Script" path="res://twojamama.gd" id="4_ob536"]
 [ext_resource type="Resource" uid="uid://b3nu4onbkdpk0" path="res://Resources/Stats/DataSource.tres" id="5_t2yaw"]
 [ext_resource type="PackedScene" uid="uid://lmxnr6tn7k10" path="res://Components/json_handle.tscn" id="6_mygmc"]
 [ext_resource type="Texture2D" uid="uid://bd86qluse2j6o" path="res://Resources/Textures/Pointer.png" id="8_6kh7g"]
 [ext_resource type="PackedScene" uid="uid://r6i6w7yauut5" path="res://Components/data_chart.tscn" id="8_coi6w"]
 [ext_resource type="PackedScene" uid="uid://bhuwwjnnotsr1" path="res://Panels/option_panel.tscn" id="10_42lye"]
+[ext_resource type="PackedScene" uid="uid://bxpd4b0mu1q5v" path="res://Components/stat_double_box_Light.tscn" id="12_pd45l"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k7thx"]
 animation = &"Extend"
@@ -75,7 +75,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(122.23, 221.378), Vector2(122.23, 293), Vector2(154.3, 293)]
+"values": [Vector2(-34, 221.378), Vector2(-34, 293), Vector2(-2.174, 293)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -84,10 +84,10 @@ tracks/1/path = NodePath("../DragComponent2:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(823, 236), Vector2(824, 310)]
+"values": [Vector2(1012, 236), Vector2(980, 236), Vector2(980, 310)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -96,7 +96,7 @@ tracks/2/path = NodePath("../DragComponent2:SCALE_FACTOR")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.4, 0.5),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-0.71, 0.705), Vector2(-0.71, 0.718)]
@@ -111,7 +111,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1.038, 1), Vector2(0.999, 1.3)]
+"values": [Vector2(1.228, 1), Vector2(1.188, 1.3)]
 }
 
 [sub_resource type="Animation" id="Animation_14txr"]
@@ -127,7 +127,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(154.846, 221.378), Vector2(122, 221)]
+"values": [Vector2(-2.174, 221.378), Vector2(-34, 221)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -139,7 +139,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(823, 236), Vector2(857, 236)]
+"values": [Vector2(980, 237), Vector2(1012, 237)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -151,7 +151,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.999, 1), Vector2(1.039, 1)]
+"values": [Vector2(1.188, 1), Vector2(1.228, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tx2s3"]
@@ -166,7 +166,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(154.846, 221.403)]
+"values": [Vector2(-2.174, 221.403)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -178,7 +178,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(823, 236)]
+"values": [Vector2(980, 236)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -202,7 +202,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.999, 1)]
+"values": [Vector2(1.188, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3erw1"]
@@ -238,16 +238,15 @@ libraries = {
 [node name="DragComponent2" parent="." instance=ExtResource("2_3m6cf")]
 show_behind_parent = true
 offset_top = 0.0
-offset_right = 823.0
+offset_right = 980.0
 offset_bottom = 236.0
 scale = Vector2(-1, 1)
 SCALE_FACTOR = Vector2(-0.71, 0.705)
 
 [node name="Area2D" type="Area2D" parent="DragComponent2"]
 position = Vector2(1, 0)
-scale = Vector2(0.999, 1)
+scale = Vector2(1.188, 1)
 monitorable = false
-script = ExtResource("4_ob536")
 
 [node name="MainCol" type="CollisionShape2D" parent="DragComponent2/Area2D"]
 position = Vector2(411.888, 118.881)
@@ -259,66 +258,93 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 
 [node name="OptionPanel" parent="DragComponent2/Node" instance=ExtResource("10_42lye")]
-position = Vector2(154.846, 221.403)
+position = Vector2(-2.174, 221.403)
 
-[node name="Container" type="Container" parent="DragComponent2/Node"]
-offset_right = 823.0
-offset_bottom = 235.0
+[node name="Container" type="Node2D" parent="DragComponent2/Node"]
 
 [node name="TitleBox" type="Sprite2D" parent="DragComponent2/Node/Container"]
-position = Vector2(411, 117)
-scale = Vector2(0.657123, 0.479589)
+position = Vector2(333.086, 117)
+scale = Vector2(0.781487, 0.479589)
 texture = ExtResource("2_6s1v3")
 
-[node name="Gas2" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
-position = Vector2(740.089, 19.1313)
-VSource = ExtResource("5_t2yaw")
-Name = "Gas2"
-UnitName = "%"
+[node name="Container" type="Container" parent="DragComponent2/Node/Container"]
+offset_left = -156.0
+offset_right = 822.0
+offset_bottom = 232.0
 
 [node name="ArduinoReader" parent="DragComponent2/Node/Container" instance=ExtResource("3_tk0wr")]
 modulate = Color(0.762404, 0.762404, 0.762404, 1)
-position = Vector2(4.08922, 193.131)
+position = Vector2(-129.447, 189.609)
 
 [node name="Gas1" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
-position = Vector2(577.089, 19.1313)
+offset_left = 393.629
+offset_top = 2.19481
+offset_right = 559.629
+offset_bottom = 66.1948
 VSource = ExtResource("5_t2yaw")
 Name = "Gas1"
 UnitName = "%"
 
+[node name="Humidity" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
+offset_left = 256.566
+offset_top = 2.19516
+offset_right = 422.566
+offset_bottom = 66.1952
+VSource = ExtResource("5_t2yaw")
+Name = "Humidity"
+UnitName = "%"
+
 [node name="Radiation" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
-position = Vector2(412.089, 19.1313)
+offset_left = 119.503
+offset_top = 2.19551
+offset_right = 285.503
+offset_bottom = 66.1955
 VSource = ExtResource("5_t2yaw")
 Name = "Radiation"
 UnitName = "uSv"
 
 [node name="Pressure" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
-position = Vector2(247.089, 19.1313)
+offset_left = -17.5596
+offset_top = 2.19586
+offset_right = 148.44
+offset_bottom = 66.1959
 VSource = ExtResource("5_t2yaw")
 Name = "Pressure"
 UnitName = "Pa"
 
 [node name="Temperature" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
-position = Vector2(82.0892, 19.1313)
+offset_left = -153.224
+offset_top = 2.1962
+offset_right = 12.7764
+offset_bottom = 66.1962
 VSource = ExtResource("5_t2yaw")
 Name = "Temperature"
 UnitName = "C"
 
-[node name="Chart" type="Node2D" parent="DragComponent2/Node/Container"]
+[node name="Gas2" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
+offset_left = 530.692
+offset_top = 2.19447
+offset_right = 696.692
+offset_bottom = 66.1945
+VSource = ExtResource("5_t2yaw")
+Name = "Gas2"
+UnitName = "%"
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="DragComponent2/Node/Container/Chart"]
+[node name="ChartTemperature" type="Node2D" parent="DragComponent2/Node/Container"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="DragComponent2/Node/Container/ChartTemperature"]
 anchors_preset = -1
 anchor_left = 0.499392
 anchor_top = 0.493617
 anchor_right = 0.499392
 anchor_bottom = 0.493617
-offset_left = 23.0
-offset_top = 75.0
-offset_right = 811.0
-offset_bottom = 178.0
+offset_left = -150.426
+offset_top = 59.5388
+offset_right = 637.573
+offset_bottom = 162.539
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="DragComponent2/Node/Container/Chart/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer"]
 handle_input_locally = false
 gui_disable_input = true
 size = Vector2i(788, 103)
@@ -326,24 +352,24 @@ size_2d_override = Vector2i(1135, 80)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="DataChart" parent="DragComponent2/Node/Container/Chart/SubViewportContainer/SubViewport" instance=ExtResource("8_coi6w")]
+[node name="DataChart" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer/SubViewport" instance=ExtResource("8_coi6w")]
 scale = Vector2(9.09, 9.09)
 
-[node name="Camera2D" type="Camera2D" parent="DragComponent2/Node/Container/Chart/SubViewportContainer/SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer/SubViewport"]
 position = Vector2(7626, 1306)
 offset = Vector2(-14.98, -158.195)
 zoom = Vector2(0.085, 0.098)
 
-[node name="DataSlider" type="HSlider" parent="DragComponent2/Node/Container/Chart"]
+[node name="DataSlider" type="HSlider" parent="DragComponent2/Node/Container"]
 anchors_preset = -1
 anchor_left = 0.503038
 anchor_top = 0.497872
 anchor_right = 0.503038
 anchor_bottom = 0.497872
-offset_left = 813.0
-offset_top = 70.0
-offset_right = 1554.0
-offset_bottom = 191.0
+offset_left = 639.783
+offset_top = 56.7396
+offset_right = 1380.78
+offset_bottom = 177.74
 scale = Vector2(-1, 1)
 size_flags_vertical = 8
 theme_override_icons/grabber = ExtResource("8_6kh7g")
@@ -354,6 +380,12 @@ theme_override_styles/slider = SubResource("StyleBoxEmpty_qdrmr")
 max_value = 0.0
 metadata/_edit_use_anchors_ = true
 
+[node name="Light" parent="DragComponent2/Node/Container" instance=ExtResource("12_pd45l")]
+offset_left = 666.357
+offset_top = 2.19412
+offset_right = 856.353
+offset_bottom = 179.194
+
 [connection signal="start_load" from="JsonHandle" to="." method="_on_json_handle_start_load"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="focus_entered" from="DragComponent2" to="." method="_on_drag_component_2_focus_entered"]
@@ -363,5 +395,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="maximize" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_maximize"]
 [connection signal="minimize" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_minimize"]
 [connection signal="OnUpdate" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_update"]
-[connection signal="changed" from="DragComponent2/Node/Container/Chart/DataSlider" to="." method="_on_data_slider_changed"]
-[connection signal="value_changed" from="DragComponent2/Node/Container/Chart/DataSlider" to="." method="_on_data_slider_value_changed"]
+[connection signal="changed" from="DragComponent2/Node/Container/DataSlider" to="." method="_on_data_slider_changed"]
+[connection signal="value_changed" from="DragComponent2/Node/Container/DataSlider" to="." method="_on_data_slider_value_changed"]

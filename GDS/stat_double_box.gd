@@ -1,4 +1,4 @@
-extends Node2D
+extends Button
 
 @export var MSource: ModSource = null
 @export var VSource: StResource = null
@@ -10,7 +10,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Title.text = Name + " (" + UnitName + ")"
-	$Value.text = VSource.Values[Name]
+	$Value.text = ""
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

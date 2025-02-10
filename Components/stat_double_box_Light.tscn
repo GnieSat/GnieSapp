@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxpd4b0mu1q5v"]
+
+[ext_resource type="PackedScene" uid="uid://bebvflxa8dens" path="res://Components/StatDoubleBox.tscn" id="1_ank27"]
+[ext_resource type="Script" path="res://GDS/stat_double_box_Light.gd" id="2_tyyld"]
+[ext_resource type="Texture2D" uid="uid://dom3n6fp1qv3l" path="res://Resources/Textures/colorblock.png" id="3_q6vcx"]
+[ext_resource type="Texture2D" uid="uid://ba3dto7xgtrls" path="res://Resources/Textures/statBlock.png" id="4_kq58u"]
+
+[node name="Light" instance=ExtResource("1_ank27")]
+offset_left = -15.0
+offset_top = 7.0
+offset_right = 175.0
+offset_bottom = 184.0
+script = ExtResource("2_tyyld")
+Name = "Light"
+
+[node name="StatBlock2" parent="." index="0"]
+modulate = Color(1, 1, 1, 1)
+position = Vector2(145, 76.25)
+scale = Vector2(0.813658, 0.833999)
+texture = ExtResource("3_q6vcx")
+
+[node name="StatBlock" parent="." index="1"]
+position = Vector2(94.625, 17.3125)
+scale = Vector2(0.15649, 0.0773649)
+
+[node name="Title" parent="." index="2"]
+offset_right = 186.0
+offset_bottom = 29.0
+
+[node name="Value" parent="." index="3"]
+offset_left = 217.5
+offset_top = 1.25
+offset_right = 370.5
+offset_bottom = 29.25
+text = ""
+
+[node name="StatBlock4" type="Sprite2D" parent="." index="4"]
+modulate = Color(0.808563, 0.855007, 0.937355, 1)
+position = Vector2(52.5, 103.75)
+scale = Vector2(0.0832622, 0.0692568)
+texture = ExtResource("4_kq58u")
+
+[node name="StatBlock5" type="Sprite2D" parent="." index="5"]
+modulate = Color(0.808563, 0.855007, 0.937355, 1)
+position = Vector2(52.5, 76.25)
+scale = Vector2(0.0832622, 0.0692568)
+texture = ExtResource("4_kq58u")
+
+[node name="StatBlock6" type="Sprite2D" parent="." index="6"]
+modulate = Color(0.808563, 0.855007, 0.937355, 1)
+position = Vector2(95, 133.75)
+scale = Vector2(0.146243, 0.0692568)
+texture = ExtResource("4_kq58u")
+
+[node name="StatBlock7" type="Sprite2D" parent="." index="7"]
+modulate = Color(0.808563, 0.855007, 0.937355, 1)
+position = Vector2(95, 161.25)
+scale = Vector2(0.146243, 0.0692568)
+texture = ExtResource("4_kq58u")
+
+[node name="StatBlock3" type="Sprite2D" parent="." index="8"]
+modulate = Color(0.808563, 0.855007, 0.937355, 1)
+position = Vector2(52.5, 48.4375)
+scale = Vector2(0.0832622, 0.0692567)
+texture = ExtResource("4_kq58u")
+
+[node name="R" type="RichTextLabel" parent="." index="9"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 5.0
+offset_top = 36.0
+offset_right = 101.0
+offset_bottom = 60.0
+text = "R:"
+
+[node name="G" type="RichTextLabel" parent="." index="10"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 5.0
+offset_top = 63.75
+offset_right = 101.0
+offset_bottom = 87.75
+text = "G:"
+
+[node name="B" type="RichTextLabel" parent="." index="11"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 5.0
+offset_top = 91.25
+offset_right = 101.0
+offset_bottom = 115.25
+text = "B:"
+
+[node name="Clear" type="RichTextLabel" parent="." index="12"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 122.0
+offset_right = 180.0
+offset_bottom = 146.0
+text = "Clear:"
+
+[node name="IR" type="RichTextLabel" parent="." index="13"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 149.0
+offset_right = 180.0
+offset_bottom = 174.0
+text = "IR:"

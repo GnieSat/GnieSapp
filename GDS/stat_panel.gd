@@ -5,15 +5,20 @@ var last_OptionPanelPos : Vector2 = Vector2(0,0)
 var mouse_entered : bool = false
 var has_focus : bool = false
 
+@onready var ArduinoProcessor : Node = get_node("DragComponent2/Node/Container/ArduinoReader")
+@onready var OptionPanel : Node = get_node("DragComponent2/Node/OptionPanel")
+@onready var DataSlider : Node = get_node("DragComponent2/Node/Container/DataSlider")
 @onready var state_machine = $AnimationTree.get("parameters/playback")
+
+signal MapUpdate(data : Dictionary)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$DragComponent2/Node/OptionPanel.load.connect(_on_option_panel_load)
-	$DragComponent2/Node/OptionPanel.start.connect(_on_option_panel_start)
-	$DragComponent2/Node/OptionPanel.stop.connect(_on_option_panel_stop)
-	$DragComponent2/Node/OptionPanel.pathsave.connect(_on_option_panel_pathsave)
-	$DragComponent2/Node/OptionPanel.pathload.connect(_on_option_panel_pathload)
+	OptionPanel.load.connect(_on_option_panel_load)
+	OptionPanel.start.connect(_on_option_panel_start)
+	OptionPanel.stop.connect(_on_option_panel_stop)
+	OptionPanel.pathsave.connect(_on_option_panel_pathsave)
+	OptionPanel.pathload.connect(_on_option_panel_pathload)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -24,37 +29,73 @@ var update = func():
 
 var update_Slider = func(): # this function does nothing for the first call
 	update_Slider = func():
-		$DragComponent2/Node/Container/Chart/DataSlider.max_value += 1
-		if $DragComponent2/Node/Container/Chart/DataSlider.max_value - 1 == $DragComponent2/Node/Container/Chart/DataSlider.value:
-			$DragComponent2/Node/Container/Chart/DataSlider.value = $DragComponent2/Node/Container/Chart/DataSlider.max_value
+		DataSlider.max_value += 1
+		if DataSlider.max_value - 1 == DataSlider.value:
+			DataSlider.value = DataSlider.max_value
 
 func parse_to_TextBox(container: Dictionary):
 	$DragComponent2/Node/Container/Temperature.Xupdate(container["Temperature"])
 	$DragComponent2/Node/Container/Pressure.Xupdate(container["Pressure"])
 	$DragComponent2/Node/Container/Radiation.Xupdate(container["Radiation"])
+	$DragComponent2/Node/Container/Humidity.Xupdate(container["Humidity"])
 	$DragComponent2/Node/Container/Gas1.Xupdate(container["Gas1"])
 	$DragComponent2/Node/Container/Gas2.Xupdate(container["Gas2"])
+	$DragComponent2/Node/Container/Light.XXupdate(
+		str(container["Light"]["R"]),
+		str(container["Light"]["G"]),
+		str(container["Light"]["B"]),
+		str(container["Light"]["Clear"]),
+		str(container["Light"]["IR"])
+		)
+	MapUpdate.emit(container["Position"])
 
 func do_Temperature(raw_data : String) -> String:
-	return raw_data
+	return str(ArduinoProcessor.bits_to_sint8(raw_data))
 
 func do_Pressure(raw_data : String) -> String:
-	return raw_data
+	return str(ArduinoProcessor.bits_to_uint16(raw_data))
 
 func do_Radiation(raw_data : String) -> String:
-	return raw_data
+	return str(ArduinoProcessor.bits_to_uint16(raw_data))
+
+func do_Humidity(raw_data : String) -> String:
+	return str(ArduinoProcessor.bits_to_uint8(raw_data))
 
 func do_Gas(raw_data : String) -> String:
-	return raw_data
+	return str(ArduinoProcessor.bits_to_uint16(raw_data))
 
+func do_Color(raw_data : String) -> String:
+	return str(ArduinoProcessor.bits_to_uint16(raw_data))
+	
+func do_Light(raw_data : String) -> Dictionary:
+	var result : Dictionary = {
+		"R" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(0,16))),
+		"G" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(16,16))),
+		"B" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(32,16))),
+		"Clear" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(48,16))),
+		"IR" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(64,16))),
+	}
+	return result
+
+func do_Position(raw_data : String) -> Dictionary:
+	var result : Dictionary = {
+		"Lat" : str(ArduinoProcessor.bits_to_uint32(raw_data.substr(0,32))),
+		"Long" : str(ArduinoProcessor.bits_to_uint32(raw_data.substr(32,32))),
+		"Height" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(64,16))),
+		"Speed" : str(ArduinoProcessor.bits_to_uint8(raw_data.substr(80,8)))
+	}
+	return result
 
 func update_on_Raw(message : String):
 	var container : Dictionary = {
-		"Temperature" : do_Temperature(message.substr(0,2)),
-		"Pressure" : do_Pressure(message.substr(2,2)),
-		"Radiation" : do_Radiation(message.substr(4,2)),
-		"Gas1" : do_Gas(message.substr(6,2)),
-		"Gas2" : do_Gas(message.substr(8,2))
+		"Temperature" : do_Temperature(message.substr(0,8)),
+		"Pressure" : do_Pressure(message.substr(8,16)),
+		"Radiation" : do_Radiation(message.substr(24,16)),
+		"Humidity" : do_Humidity(message.substr(40, 8)),
+		"Gas1" : do_Gas(message.substr(48,16)),
+		"Gas2" : do_Gas(message.substr(64,16)),
+		"Light" : do_Light(message.substr(80, 80)),
+		"Position" : do_Position(message.substr(160, 88))
 	}
 	
 	$JsonHandle.Jadd(str(counter), container)
@@ -69,11 +110,11 @@ func update_on_Processed():
 
 
 func _on_option_panel_start() -> void:
-	$DragComponent2/Node/Container/ArduinoReader.start()
+	ArduinoProcessor.start()
 
 
 func _on_option_panel_stop() -> void:
-	$DragComponent2/Node/Container/ArduinoReader.stop()
+	ArduinoProcessor.stop()
 
 
 func _on_arduino_reader_on_update(message: String) -> void:
@@ -82,19 +123,19 @@ func _on_arduino_reader_on_update(message: String) -> void:
 
 
 func _on_data_slider_value_changed(value: float) -> void:
-	if $JsonHandle.container.has(str($DragComponent2/Node/Container/Chart/DataSlider.value)):
-		parse_to_TextBox($JsonHandle.container[str($DragComponent2/Node/Container/Chart/DataSlider.value)])
+	if $JsonHandle.container.has(str(DataSlider.value)):
+		parse_to_TextBox($JsonHandle.container[str(DataSlider.value)])
 
 
 func _on_json_handle_start_load() -> void:
 	counter = 0
-	$DragComponent2/Node/Container/Chart/DataSlider.max_value = int($JsonHandle.container["size"])
-	if $DragComponent2/Node/Container/Chart/DataSlider.max_value - 1 == $DragComponent2/Node/Container/Chart/DataSlider.value:
-		$DragComponent2/Node/Container/Chart/DataSlider.value = $DragComponent2/Node/Container/Chart/DataSlider.max_value
+	DataSlider.max_value = int($JsonHandle.container["size"])
+	if DataSlider.max_value - 1 == DataSlider.value:
+		DataSlider.value = DataSlider.max_value
 
 
 func _on_option_panel_load() -> void:
-	$DragComponent2/Node/Container/ArduinoReader.stop()
+	ArduinoProcessor.stop()
 	$JsonHandle.Jload()
 
 
@@ -120,13 +161,13 @@ func _on_option_panel_minimize() -> void:
 
 
 func _on_drag_component_2_focus_entered() -> void:
-	if not $DragComponent2/Node/OptionPanel.is_maximized:
+	if not OptionPanel.is_maximized:
 		state_machine.travel("PopOut")
 	has_focus = true
 
 
 func _on_drag_component_2_focus_exited() -> void:
-	if not $DragComponent2/Node/OptionPanel.is_maximized and not mouse_entered:
+	if not OptionPanel.is_maximized and not mouse_entered:
 		state_machine.travel("PopOut BW")
 	has_focus = false
 

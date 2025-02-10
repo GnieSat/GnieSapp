@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx2ehaa3uqc26"]
+
+[ext_resource type="Script" path="res://GDS/base_gps.gd" id="1_syq05"]
+[ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="2_kkifl"]
+[ext_resource type="PackedScene" uid="uid://caxnk7kv5g7wk" path="res://Components/buttontext.tscn" id="3_ghb5n"]
+[ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/button.tscn" id="4_2nwma"]
+
+[sub_resource type="Animation" id="Animation_0y0oa"]
+resource_name = "Extend"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseGPS:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 78), Vector2(0, -46)]
+}
+
+[sub_resource type="Animation" id="Animation_dca1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseGPS:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 78)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0yoot"]
+_data = {
+"Extend": SubResource("Animation_0y0oa"),
+"RESET": SubResource("Animation_dca1i")
+}
+
+[node name="BaseGPS" type="Node2D"]
+script = ExtResource("1_syq05")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0yoot")
+}
+
+[node name="BaseGPS" type="Node2D" parent="."]
+position = Vector2(0, 78)
+
+[node name="Button" type="Button" parent="BaseGPS"]
+texture_filter = 1
+offset_left = -31.0
+offset_top = -99.0
+offset_right = 63.0
+offset_bottom = -68.0
+text = "^"
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleBox" type="Sprite2D" parent="BaseGPS"]
+position = Vector2(16.1068, 7.0405e-07)
+rotation = 1.5708
+scale = Vector2(0.125, 0.190342)
+texture = ExtResource("2_kkifl")
+
+[node name="Lat" parent="BaseGPS" instance=ExtResource("3_ghb5n")]
+position = Vector2(28, -24.12)
+
+[node name="TextEdit" parent="BaseGPS/Lat" index="2"]
+text = "50.36774395230563
+"
+placeholder_text = "Lat"
+metadata/_edit_use_anchors_ = true
+
+[node name="Long" parent="BaseGPS" instance=ExtResource("3_ghb5n")]
+position = Vector2(28, -68.55)
+
+[node name="TextEdit" parent="BaseGPS/Long" index="2"]
+text = "19.512461291189055"
+placeholder_text = "Long
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Update" parent="BaseGPS" instance=ExtResource("4_2nwma")]
+position = Vector2(-22, 13)
+Name = "[center]Update[/center]"
+
+[node name="Button" parent="BaseGPS/Update" index="0"]
+modulate = Color(0.783523, 0.783523, 0.783523, 1)
+
+[node name="RichTextLabel" parent="BaseGPS/Update" index="1"]
+text = "[center]Update[/center]"
+
+[connection signal="pressed" from="BaseGPS/Button" to="." method="_on_button_pressed"]
+[connection signal="pressedtext" from="BaseGPS/Lat" to="." method="_on_lat_pressedtext"]
+[connection signal="pressedtext" from="BaseGPS/Long" to="." method="_on_long_pressedtext"]
+[connection signal="on_pressed" from="BaseGPS/Update" to="." method="_on_update_on_pressed"]
+
+[editable path="BaseGPS/Lat"]
+[editable path="BaseGPS/Long"]
+[editable path="BaseGPS/Update"]

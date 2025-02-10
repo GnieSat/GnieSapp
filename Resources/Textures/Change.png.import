@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds85x3jtl6o5v"
-path="res://.godot/imported/easy_charts.svg-5963eccbc8d55a9c4bb3a7a394bde2c4.ctex"
+uid="uid://dpi4yx3uld01q"
+path="res://.godot/imported/Change.png-9e685b9fc56e358f621a5613f35e4e41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://easy_charts.svg"
-dest_files=["res://.godot/imported/easy_charts.svg-5963eccbc8d55a9c4bb3a7a394bde2c4.ctex"]
+source_file="res://Resources/Textures/Change.png"
+dest_files=["res://.godot/imported/Change.png-9e685b9fc56e358f621a5613f35e4e41.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

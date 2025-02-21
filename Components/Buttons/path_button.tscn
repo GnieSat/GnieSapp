@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1qhrl0lkybs"]
 
-[ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/button.tscn" id="1_tnwxd"]
-[ext_resource type="Script" path="res://GDS/path_button.gd" id="2_pfbui"]
+[ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/Buttons/button.tscn" id="1_8kifr"]
+[ext_resource type="Script" path="res://GDS/Buttons/path_button.gd" id="2_v2iuw"]
 
-[node name="Button" instance=ExtResource("1_tnwxd")]
-script = ExtResource("2_pfbui")
+[node name="Button" instance=ExtResource("1_8kifr")]
+script = ExtResource("2_v2iuw")
 Name = "[center]Change File[/center]"
 
 [node name="RichTextLabel" parent="." index="1"]
@@ -20,7 +20,7 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.json")
 
-[node name="PathNameButton" parent="." index="3" instance=ExtResource("1_tnwxd")]
+[node name="PathNameButton" parent="." index="3" instance=ExtResource("1_8kifr")]
 position = Vector2(89, 45.835)
 rotation = -1.5708
 scale = Vector2(0.525, 0.38)

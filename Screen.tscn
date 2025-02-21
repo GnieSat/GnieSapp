@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7rap1avjeir7"]
+[gd_scene load_steps=6 format=3 uid="uid://b7rap1avjeir7"]
 
 [ext_resource type="Script" path="res://GDS/screen.gd" id="1_xhwp1"]
 [ext_resource type="PackedScene" uid="uid://sihegnjhkdoa" path="res://Panels/StatPanel.tscn" id="1_y1fu4"]
 [ext_resource type="PackedScene" uid="uid://dvtj3m146qc5k" path="res://Panels/MapViewPort.tscn" id="3_hv4pp"]
 [ext_resource type="PackedScene" uid="uid://dx2ehaa3uqc26" path="res://Components/base_gps.tscn" id="5_ksuhr"]
+[ext_resource type="Resource" uid="uid://b386mwstlxbe3" path="res://Resources/Stats/LastData.tres" id="5_tdx3p"]
 
 [node name="Screen" type="Node2D"]
 script = ExtResource("1_xhwp1")
@@ -29,9 +30,13 @@ position = Vector2(630, 356)
 zoom = Vector2(1.515, 1.515)
 
 [node name="BaseGPS" parent="." instance=ExtResource("5_ksuhr")]
-position = Vector2(36, 690)
+position = Vector2(90, 690)
+last_open_data = ExtResource("5_tdx3p")
 
 [connection signal="MapUpdate" from="StatPanel" to="SubViewportContainer/MapViewport" method="_on_stat_panel_map_update"]
+[connection signal="focus_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_focus_update"]
 [connection signal="lat_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_lat_update"]
 [connection signal="long_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_long_update"]
+[connection signal="map_range_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_map_range_update"]
 [connection signal="map_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_map_update"]
+[connection signal="model_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_model_update"]

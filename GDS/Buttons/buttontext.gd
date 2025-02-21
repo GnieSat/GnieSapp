@@ -3,4 +3,4 @@ extends button
 signal pressedtext(val : String)
 
 func _on_on_pressed() -> void:
-	pressedtext.emit($TextEdit.text)
+	pressedtext.emit($LineEdit.text)

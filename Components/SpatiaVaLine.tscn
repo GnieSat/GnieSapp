@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://cishv4b01tf4"]
+
+[ext_resource type="Script" path="res://SpatiaVaLine.gd" id="1_6tbx8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o20sb"]
+albedo_color = Color(0.529412, 0.345098, 0.345098, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_uflkl"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="SpatiaVaLine" type="Node3D"]
+script = ExtResource("1_6tbx8")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+billboard = 1
+text = "0M"
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+material_override = SubResource("StandardMaterial3D_o20sb")
+polygon = PackedVector2Array(0, 0.1, 0.0587785, 0.0809017, 0.0951056, 0.0309017, 0.0951056, -0.0309017, 0.0587785, -0.0809017, 1.22461e-17, -0.1, -0.0587785, -0.0809017, -0.0951056, -0.0309017, -0.0951056, 0.0309017, -0.0587785, 0.0809017)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_uflkl")
+
+[connection signal="curve_changed" from="Path3D" to="." method="_on_path_3d_curve_changed"]

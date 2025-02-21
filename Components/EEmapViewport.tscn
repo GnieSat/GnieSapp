@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bbra8od3fk"]
+
+[node name="EEMapViewport" type="SubViewport"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

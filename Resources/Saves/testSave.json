@@ -1,24 +1,129 @@
 {
 	"0": {
-		"Gas1": "94",
-		"Gas2": "29",
-		"Pressure": "12",
-		"Radiation": "23",
-		"Temperature": "37"
+		"Gas1": "21222",
+		"Gas2": "1633",
+		"Humidity": "83",
+		"Light": {
+			"B": "38214",
+			"Clear": "44292",
+			"G": "15592",
+			"IR": "15486",
+			"R": "29270"
+		},
+		"Position": {
+			"Height": "28248",
+			"Lat": "-2909327360",
+			"Long": "214633559847539630000000",
+			"Speed": "132"
+		},
+		"Pressure": "35736",
+		"Radiation": "28203",
+		"Temperature": "20"
 	},
 	"1": {
-		"Gas1": "34",
-		"Gas2": "18",
-		"Pressure": "26",
-		"Radiation": "87",
-		"Temperature": "15"
+		"Gas1": "35806",
+		"Gas2": "32641",
+		"Humidity": "188",
+		"Light": {
+			"B": "11039",
+			"Clear": "54013",
+			"G": "39395",
+			"IR": "60565",
+			"R": "55690"
+		},
+		"Position": {
+			"Height": "44887",
+			"Lat": "0",
+			"Long": "-0",
+			"Speed": "125"
+		},
+		"Pressure": "63764",
+		"Radiation": "3131",
+		"Temperature": "8"
 	},
 	"2": {
-		"Gas1": "10",
-		"Gas2": "43",
-		"Pressure": "38",
-		"Radiation": "59",
-		"Temperature": "29"
+		"Gas1": "43610",
+		"Gas2": "30948",
+		"Humidity": "44",
+		"Light": {
+			"B": "905",
+			"Clear": "19729",
+			"G": "45634",
+			"IR": "28161",
+			"R": "12419"
+		},
+		"Position": {
+			"Height": "40749",
+			"Lat": "-24154610745038546000000",
+			"Long": "0",
+			"Speed": "128"
+		},
+		"Pressure": "53094",
+		"Radiation": "53847",
+		"Temperature": "55"
 	},
-	"size": "2"
+	"3": {
+		"Gas1": "15099",
+		"Gas2": "45450",
+		"Humidity": "37",
+		"Light": {
+			"B": "142",
+			"Clear": "4578",
+			"G": "64427",
+			"IR": "16285",
+			"R": "51298"
+		},
+		"Position": {
+			"Height": "16151",
+			"Lat": "0",
+			"Long": "0",
+			"Speed": "209"
+		},
+		"Pressure": "13441",
+		"Radiation": "14472",
+		"Temperature": "96"
+	},
+	"4": {
+		"Gas1": "21222",
+		"Gas2": "1633",
+		"Humidity": "83",
+		"Light": {
+			"B": "38214",
+			"Clear": "44292",
+			"G": "15592",
+			"IR": "15486",
+			"R": "29270"
+		},
+		"Position": {
+			"Height": "28248",
+			"Lat": "-2909327360",
+			"Long": "214633559847539630000000",
+			"Speed": "132"
+		},
+		"Pressure": "35736",
+		"Radiation": "28203",
+		"Temperature": "20"
+	},
+	"5": {
+		"Gas1": "35806",
+		"Gas2": "32641",
+		"Humidity": "188",
+		"Light": {
+			"B": "11039",
+			"Clear": "54013",
+			"G": "39395",
+			"IR": "60565",
+			"R": "55690"
+		},
+		"Position": {
+			"Height": "44887",
+			"Lat": "0",
+			"Long": "-0",
+			"Speed": "125"
+		},
+		"Pressure": "63764",
+		"Radiation": "3131",
+		"Temperature": "8"
+	},
+	"size": "5"
 }

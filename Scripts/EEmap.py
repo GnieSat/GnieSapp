@@ -14,6 +14,7 @@ import geopy
 import geopy.distance
 import matplotlib.pyplot as plt
 import sys
+import time
 
 
 Cords = [sys.argv[1], sys.argv[2]]
@@ -68,18 +69,36 @@ collection = (
 
 image = ee.Image(collection.first())
 
-url = image.getThumbURL(
-    {
-        "format": "png",
-        "bands": ["B4", "B3", "B2"],
-        "dimensions": [2800, 2800],
-        "region": Map,
-        "min": 0,
-        "max": 4000,
-    }
-)
+try:
+    url = image.getThumbURL(
+        {
+            "format": "png",
+            "bands": ["B4", "B3", "B2"],
+            "dimensions": [2800, 2800],
+            "region": Map,
+            "min": 0,
+            "max": 4000,
+        }
+    )
 
-thumbURL_response = requests.get(url, stream=True)
-PIL = Image.open(thumbURL_response.raw)
+    print(f"Download URL: {url}")
+except Exception as e:
+    print(f"Error generating URL: {e}")
+    sys.exit(1)
 
-PIL.save("NewMap.png")
+# Download the image
+try:
+    response = requests.get(url, stream=True)
+    response.raise_for_status()  # Check for HTTP errors
+
+    # Save the image properly
+    with open("NewMap.png", "wb") as f:
+        for chunk in response.iter_content(chunk_size=8192):
+            if chunk:
+                f.write(chunk)
+    print("Download complete!")
+
+
+except requests.exceptions.RequestException as e:
+    print(f"Error downloading image: {e}")
+    sys.exit(1)

@@ -27,6 +27,9 @@ func Jsave():
 	file.store_string(jsonsolution)
 	file.close()
 
+func JustAdd(String, value : Dictionary, size : int):
+	var new_entry : Dictionary = Dictionary()
+
 func Jload():
 	if FileAccess.file_exists(LoadPath):
 		var jsonHandle : Dictionary = {}

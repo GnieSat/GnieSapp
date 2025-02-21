@@ -10,6 +10,9 @@ signal load
 signal pathsave(path : String)
 signal pathload(path : String)
 
+signal PortChange(port : String)
+signal WriteType_change(val : int)
+
 signal maximize
 signal minimize
 var is_maximized = false
@@ -53,3 +56,11 @@ func _on_extend_button_on_pressed() -> void:
 		is_maximized = true
 		$TabContainer/ExtendButton/RichTextLabel.text = "[center]<-[/center]"
 		$AnimationPlayer.play("Extend")
+
+
+func _on_button_port_pressedtext(val: String) -> void:
+	PortChange.emit(val)
+
+
+func _on_WriteType_selected(index: int) -> void:
+	WriteType_change.emit(index)

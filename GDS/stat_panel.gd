@@ -4,6 +4,9 @@ var counter : int = 0;
 var last_OptionPanelPos : Vector2 = Vector2(0,0) 
 var mouse_entered : bool = false
 var has_focus : bool = false
+var error_weight : int = 0
+
+var WorkMode : String = ""
 
 @onready var ArduinoProcessor : Node = get_node("DragComponent2/Node/Container/ArduinoReader")
 @onready var OptionPanel : Node = get_node("DragComponent2/Node/OptionPanel")
@@ -11,6 +14,7 @@ var has_focus : bool = false
 @onready var state_machine = $AnimationTree.get("parameters/playback")
 
 signal MapUpdate(data : Dictionary)
+signal MapGPSUpdate(pos : Vector3)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -79,8 +83,8 @@ func do_Light(raw_data : String) -> Dictionary:
 
 func do_Position(raw_data : String) -> Dictionary:
 	var result : Dictionary = {
-		"Lat" : str(ArduinoProcessor.bits_to_uint32(raw_data.substr(0,32))),
-		"Long" : str(ArduinoProcessor.bits_to_uint32(raw_data.substr(32,32))),
+		"Long" : str(ArduinoProcessor.bits_to_float32(raw_data.substr(0,32))),
+		"Lat" : str(ArduinoProcessor.bits_to_float32(raw_data.substr(32,32))),
 		"Height" : str(ArduinoProcessor.bits_to_uint16(raw_data.substr(64,16))),
 		"Speed" : str(ArduinoProcessor.bits_to_uint8(raw_data.substr(80,8)))
 	}
@@ -97,20 +101,29 @@ func update_on_Raw(message : String):
 		"Light" : do_Light(message.substr(80, 80)),
 		"Position" : do_Position(message.substr(160, 88))
 	}
-	
 	$JsonHandle.Jadd(str(counter), container)
 	$JsonHandle.Jsave()
 	counter += 1
 	
 	update_Slider.call()
+	update_SliderLayout()
 
 
 func update_on_Processed():
 	pass
 
+func update_SliderLayout():
+	DataSlider.position.x = -100 + DataSlider.max_value * 15
+	DataSlider.size.x = DataSlider.max_value * 15
 
 func _on_option_panel_start() -> void:
+	if WorkMode == "Read":
+		counter = 0
+		DataSlider.max_value = 0
+		if DataSlider.max_value - 1 == DataSlider.value:
+			DataSlider.value = DataSlider.max_value
 	ArduinoProcessor.start()
+	WorkMode = "Active"
 
 
 func _on_option_panel_stop() -> void:
@@ -118,6 +131,9 @@ func _on_option_panel_stop() -> void:
 
 
 func _on_arduino_reader_on_update(message: String) -> void:
+	#if messagep[0] == "G":
+		#
+	#else:
 	update_on_Raw(message)
 
 
@@ -132,6 +148,8 @@ func _on_json_handle_start_load() -> void:
 	DataSlider.max_value = int($JsonHandle.container["size"])
 	if DataSlider.max_value - 1 == DataSlider.value:
 		DataSlider.value = DataSlider.max_value
+	update_SliderLayout()
+	WorkMode = "Read"
 
 
 func _on_option_panel_load() -> void:
@@ -178,3 +196,22 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	mouse_entered = false
+
+
+func _on_option_panel_port_change(port: String) -> void:
+	$DragComponent2/Node/Container/ArduinoReader.PortName = port
+
+
+func _on_option_panel_write_type_change(val: int) -> void:
+	pass # Replace with function body.
+
+
+func _on_arduino_reader_on_error(really: bool) -> void:
+	if really:
+		error_weight += 1
+	else:
+		error_weight -= 1
+	if error_weight > 2:
+		$DragComponent2/Node/StabilityState.texture = ImageTexture.create_from_image(Image.load_from_file("res://Resources/Textures/NEIN.png"))
+	if error_weight > 0:
+		$DragComponent2/Node/StabilityState.texture = ImageTexture.create_from_image(Image.load_from_file("res://Resources/Textures/MID.png"))

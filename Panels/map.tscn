@@ -1,24 +1,98 @@
-[gd_scene load_steps=9 format=3 uid="uid://vu0kqsgqdtnm"]
+[gd_scene load_steps=10 format=3 uid="uid://vu0kqsgqdtnm"]
 
+[ext_resource type="Script" path="res://GDS/minor_map.gd" id="1_evinw"]
+[ext_resource type="Texture2D" uid="uid://d3yqq2g4g6r2" path="res://Resources/Textures/Pin.png" id="1_nt8u4"]
 [ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="2_ehksb"]
-[ext_resource type="Material" uid="uid://cph8faidcwds8" path="res://Resources/Textures/pole.tres" id="2_sbl6u"]
-[ext_resource type="Texture2D" uid="uid://bf2fut6wxydha" path="res://Resources/Textures/rangemap.png" id="3_nw6qh"]
-[ext_resource type="Texture2D" uid="uid://dom3n6fp1qv3l" path="res://Resources/Textures/colorblock.png" id="4_6vwsl"]
-[ext_resource type="Environment" uid="uid://dgusn6423oq38" path="res://Resources/Pizda.tres" id="4_spdhi"]
+[ext_resource type="Script" path="res://GDS/MapOSM.gd" id="3_sxwpe"]
+[ext_resource type="Environment" uid="uid://dgusn6423oq38" path="res://Resources/Env.tres" id="4_spdhi"]
+[ext_resource type="PackedScene" uid="uid://cma6f72bwglfj" path="res://Components/SpatiaLine.tscn" id="5_xwpqs"]
+[ext_resource type="Texture2D" uid="uid://b47lpaqn3y4vw" path="res://NewMap.png" id="6_jk7tv"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dvvng"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54shq"]
 albedo_color = Color(0.248761, 0.540352, 0.355845, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tc45u"]
-
 [node name="Map" type="Node3D"]
+script = ExtResource("1_evinw")
 
 [node name="Physical" type="Node3D" parent="."]
 
-[node name="CanSat" type="Node3D" parent="Physical"]
+[node name="Map" type="Node3D" parent="Physical"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="Physical/Map"]
+wait_time = 0.1
+one_shot = true
+
+[node name="MapOSM" type="Sprite3D" parent="Physical/Map"]
+transform = Transform3D(16, 0, 0, 0, -6.99382e-07, 16, 0, -16, -6.99382e-07, 0, -0.01, 0)
+shaded = true
+texture_filter = 0
+texture = ExtResource("6_jk7tv")
+region_enabled = true
+region_rect = Rect2(0, 0, 2800, 2800)
+script = ExtResource("3_sxwpe")
+MapSizePresets = Array[Rect2]([Rect2(1120, 1120, 560, 560), Rect2(840, 840, 1120, 1120), Rect2(560, 560, 1680, 1680), Rect2(280, 280, 2240, 2240), Rect2(0, 0, 2800, 2800)])
+
+[node name="Lines" type="Node3D" parent="Physical"]
+
+[node name="XLine" parent="Physical/Lines" instance=ExtResource("5_xwpqs")]
+width_radius = 2.0
+
+[node name="YLine" parent="Physical/Lines" instance=ExtResource("5_xwpqs")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+color_preset = 1
+width_radius = 2.0
+
+[node name="ZLine" parent="Physical/Lines" instance=ExtResource("5_xwpqs")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+color_preset = 2
+width_radius = 2.0
+
+[node name="TargetLine" parent="Physical/Lines" instance=ExtResource("5_xwpqs")]
+color_preset = 3
+width_radius = 2.0
+
+[node name="Skeleton" type="Node3D" parent="Physical"]
+
+[node name="SkeleXLine" parent="Physical/Skeleton" instance=ExtResource("5_xwpqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -224, 0, 0)
+color_preset = 4
+width_radius = 1.0
+
+[node name="SkeleYLine" parent="Physical/Skeleton" instance=ExtResource("5_xwpqs")]
+transform = Transform3D(-1.63175e-06, -1, 0, 37.33, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+color_preset = 4
+width_radius = 1.0
+
+[node name="SkeleYLabel" type="Label3D" parent="Physical/Skeleton/SkeleYLine"]
+transform = Transform3D(-1.17095e-08, 0.267881, 0, -10, -4.37115e-07, 0, 0, 0, 10, 30.0602, -4.90507e-05, 0)
+pixel_size = 0.01
+billboard = 1
+text = "5km"
+
+[node name="SkeleZLine" parent="Physical/Skeleton" instance=ExtResource("5_xwpqs")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -224)
+color_preset = 4
+width_radius = 1.0
+
+[node name="CenterAnchor" type="Node3D" parent="Physical"]
+
+[node name="Anchor" type="Node3D" parent="Physical/CenterAnchor"]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="Physical/CenterAnchor/Anchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.845)
+script = ExtResource("2_ehksb")
+SCROLL_SPEED = 200.0
+ZOOM_SPEED = 10.0
+DEFAULT_DISTANCE = 120.0
+ROTATE_SPEED = 0.25
+ANCHOR_NODE_PATH = NodePath("..")
+
+[node name="CanSat" type="Node3D" parent="Physical"]
+transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 0, 0, 0)
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Physical/CanSat"]
 transform = Transform3D(1, 0, 0, 0, 0.69476, 0, 0, 0, 1, 0, 0, 0)
@@ -26,49 +100,20 @@ mesh = SubResource("CylinderMesh_dvvng")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_54shq")
 
-[node name="Anchor" type="Node3D" parent="Physical"]
+[node name="Sprite3D" type="Sprite3D" parent="Physical/CanSat"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.03, 0.874, 0)
+billboard = 2
+texture = ExtResource("1_nt8u4")
 
-[node name="Camera3D" type="Camera3D" parent="Physical/Anchor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.845)
-script = ExtResource("2_ehksb")
-SCROLL_SPEED = 100.0
-ZOOM_SPEED = 10.0
-DEFAULT_DISTANCE = 26.0
-ROTATE_SPEED = 0.25
-ANCHOR_NODE_PATH = NodePath("..")
-
-[node name="Map" type="Node3D" parent="Physical"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Physical/Map"]
-transform = Transform3D(-4.52987e-09, 5.5, 0, 0.06, 4.15238e-07, 0, 0, 0, -0.06, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_tc45u")
-surface_material_override/0 = ExtResource("2_sbl6u")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Physical/Map"]
-transform = Transform3D(-1.14641e-16, -2.40413e-07, -0.06, 0.06, -2.40413e-07, 2.71989e-23, -2.62268e-09, -5.5, 2.62268e-09, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_tc45u")
-surface_material_override/0 = ExtResource("2_sbl6u")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Physical/Map"]
-transform = Transform3D(-0.06, 0, 0, 0, 2.25, 0, 0, 0, -0.06, 0, 2.25, 0)
-mesh = SubResource("CapsuleMesh_tc45u")
-surface_material_override/0 = ExtResource("2_sbl6u")
-
-[node name="Sprite3D" type="Sprite3D" parent="Physical/Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.276, 0.154, 0)
+[node name="Label3D" type="Label3D" parent="Physical/CanSat"]
+sorting_offset = 20.0
 billboard = 1
-texture = ExtResource("3_nw6qh")
-
-[node name="Sprite3D2" type="Sprite3D" parent="Physical/Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.288444, 4.35822, 0)
-billboard = 1
-texture = ExtResource("3_nw6qh")
-
-[node name="MapOSM" type="Sprite3D" parent="Physical/Map"]
-transform = Transform3D(10.96, 0, 0, 0, -4.79077e-07, 10.96, 0, -10.96, -4.79077e-07, 0, 0, 0)
-modulate = Color(0.633757, 0.633757, 0.633757, 0.678431)
-texture = ExtResource("4_6vwsl")
+text = ".             Long:
+.             Lat:
+.             Height:
+.             Speed:"
+horizontal_alignment = 0
+width = 1000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_spdhi")
@@ -77,3 +122,5 @@ environment = ExtResource("4_spdhi")
 transform = Transform3D(0.408665, -0.808203, 0.424028, 0, 0.464595, 0.885523, -0.912684, -0.361882, 0.189864, 0, 0, 0)
 directional_shadow_mode = 0
 directional_shadow_fade_start = 0.81
+
+[connection signal="timeout" from="Physical/Map/Timer" to="Physical/Map/MapOSM" method="_on_timer_timeout"]

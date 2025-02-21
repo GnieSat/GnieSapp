@@ -12,13 +12,16 @@ public partial class PortReader : Node2D
 
 
 	[Export]
-	string PortName = "COM3";
+	string PortName = "COM4";
 
 
 	string Message;
 
 	[Signal]
 	public delegate void OnUpdateEventHandler(string message);
+
+	[Signal]
+	public delegate void OnErrorEventHandler(bool really);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -63,9 +66,18 @@ public partial class PortReader : Node2D
 		if (!Port.IsOpen) { return; }
 		Message = Port.ReadExisting();
 
-		Sign.Text = "Arduino data: " + Message;
+        if (Message == "")
+		{
+			EmitSignal(SignalName.OnError, true);
+		}
+		else 
+		{
+            EmitSignal(SignalName.OnError, false);
+            EmitSignal(SignalName.OnUpdate, Message);
+        }
+		//GD.Print(Message);
 
-		EmitSignal(SignalName.OnUpdate, Message);
+		
 	}
 
 	public void on_Click()
@@ -80,5 +92,11 @@ public partial class PortReader : Node2D
 	public int bits_to_uint16(String array) { return Convert.ToUInt16(array, 2); }
 	public int bits_to_sint32(String array) { return Convert.ToInt32(array, 2); }
 	public uint bits_to_uint32(String array) { return Convert.ToUInt32(array, 2); }
+	public float bits_to_float32(String array)
+	{
+		int integer = Convert.ToInt32(array, 2);
+		byte[] result = BitConverter.GetBytes(integer);
+		return BitConverter.ToSingle(result, 0);
+	}
 
 }

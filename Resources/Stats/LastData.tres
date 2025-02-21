@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="LastOpenData" load_steps=2 format=3 uid="uid://b386mwstlxbe3"]
+
+[ext_resource type="Script" path="res://Resources/Stats/Classes/LastCords.gd" id="1_e248o"]
+
+[resource]
+script = ExtResource("1_e248o")
+Last_Pos = Vector2(19.514, 50.362)

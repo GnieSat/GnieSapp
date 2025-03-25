@@ -10,8 +10,10 @@ signal load
 signal pathsave(path : String)
 signal pathload(path : String)
 
-signal PortChange(port : String)
+signal PortChange(index : int, port : String)
 signal WriteType_change(val : int)
+
+signal TimestampRequest
 
 signal maximize
 signal minimize
@@ -58,9 +60,17 @@ func _on_extend_button_on_pressed() -> void:
 		$AnimationPlayer.play("Extend")
 
 
-func _on_button_port_pressedtext(val: String) -> void:
-	PortChange.emit(val)
-
-
 func _on_WriteType_selected(index: int) -> void:
 	WriteType_change.emit(index)
+
+func _on_button_port_pressedtext(val: String) -> void:
+	PortChange.emit(0, val)
+
+func _on_button_port_2_pressedtext(val: String) -> void:
+	PortChange.emit(1, val)
+
+func _on_button_port_3_pressedtext(val: String) -> void:
+	PortChange.emit(2, val)
+
+func _on_Timestamp_pressed() -> void:
+	TimestampRequest.emit()

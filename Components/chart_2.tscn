@@ -1,0 +1,130 @@
+[gd_scene load_steps=4 format=3 uid="uid://conuwlqiu6uyg"]
+
+[ext_resource type="PackedScene" uid="uid://chcj7up8k8pa8" path="res://Components/Charts/Temp.tscn" id="1_jhfp7"]
+[ext_resource type="Script" path="res://GDS/chart_2.gd" id="1_voiav"]
+[ext_resource type="Script" path="res://GDS/Charts/temp.gd" id="2_d1bmu"]
+
+[node name="Chart2" type="Node2D"]
+script = ExtResource("1_voiav")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 2153.0
+offset_bottom = 279.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(2153, 279)
+render_target_update_mode = 4
+
+[node name="Container" type="TabContainer" parent="SubViewportContainer/SubViewport"]
+offset_left = -50.0
+offset_top = -100.0
+offset_right = 1339.0
+offset_bottom = 94.0
+scale = Vector2(1.6, 1.6)
+current_tab = 0
+
+[node name="Temperature" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Temperature" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(0.886181, 0.309784, 0.254201, 1)
+
+[node name="Pressure" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Pressure" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(0.544764, 0.780878, 0.850695, 1)
+
+[node name="Radiation" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Radiation" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(0.551326, 0.762454, 0.207376, 1)
+
+[node name="Humidity" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Humidity" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(0.448522, 0.621222, 0.893295, 1)
+
+[node name="Gas1" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Gas1" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(0.566753, 0.514579, 0.562505, 1)
+
+[node name="Gas2" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Gas2" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(0.80094, 0.617761, 0.368457, 1)
+
+[node name="Light" type="TabBar" parent="SubViewportContainer/SubViewport/Container"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 6
+
+[node name="Chart" parent="SubViewportContainer/SubViewport/Container/Light" instance=ExtResource("1_jhfp7")]
+layout_mode = 1
+offset_left = -76.0
+offset_top = -37.0
+offset_right = 162.0
+offset_bottom = 140.0
+scale = Vector2(0.895, 0.895)
+script = ExtResource("2_d1bmu")
+color = Color(1, 1, 1, 1)

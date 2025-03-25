@@ -2,9 +2,9 @@
 extends Node2D
 class_name button
 
-@export var Name : String = "Start"
-
 signal on_pressed
+
+@export var Name : String = "Start"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

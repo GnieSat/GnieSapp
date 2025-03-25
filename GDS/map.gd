@@ -1,27 +1,45 @@
 extends SubViewport
 
+signal trace_saved(pos : Vector3)
 signal map_generated
 
 # Called when the node enters the scene tree for the first time.
-@export var zoom : int = 16
-@onready var n : int = int(pow(2, zoom))
 @export var meter_to_px_scale = 0.224
+@export var SavePath : SaveFilePath = null
 
-@export var last_open_data : LastOpenData = null
 
 const CORD_STEP_SCALE_LAT : float = 111320
 const k_y = 111132
 var CORD_STEP_SCALE_LONG : float = 0
 var CORD_STEP_SCALE_LONG_ALT : float = 0
 
-var latlong_base = Vector3(0, 0, 0)
+var subtle_pos =  Vector3.ZERO
+var latlong_base = Vector3.ZERO
+var last_pos = Vector3.ZERO
+var last_read_pos = Vector3.ZERO
 
+#network
+var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+
+@export var Pos : Vector3 = Vector3.ZERO
+@export var Speed : float = 0.0
+@export var Distance : float = 0.0
+#
 
 func _ready() -> void:
 	_on_base_gps_map_range_update(0)
-	_on_base_gps_long_update(str(last_open_data.Last_Pos.x))
-	_on_base_gps_lat_update(str(last_open_data.Last_Pos.y))
+	
+	#network
+	peer.create_server(13500)
+	multiplayer.multiplayer_peer = peer
+	multiplayer.peer_connected.connect(do_connect)
+	multiplayer.peer_disconnected.connect(do_disconnect)
 
+func do_connect():
+	Logger.add_Log("Reader Connected")
+	
+func do_disconnect():
+	Logger.add_Log("Reader Disconnected")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -39,20 +57,59 @@ func latlong_to_meters(data : Vector3) -> Vector3:
 	CORD_STEP_SCALE_LONG_ALT = CORD_STEP_SCALE_LAT * cos( (latlong_base.y + data.y) / 2 * 0.01745329)
 	
 	result.x = (data.x - latlong_base.x) * CORD_STEP_SCALE_LONG * meter_to_px_scale
-	result.y = data.y * meter_to_px_scale
+	#result.y = data.y * meter_to_px_scale
+	result.y = 60 * meter_to_px_scale
 	result.z = (data.z - latlong_base.z) * k_y * meter_to_px_scale * -1
 	#print(result)
 	return result
 
+func save_Cords() -> void:
+	var save_file := ConfigFile.new()
+	save_file.set_value("Cords", "Long", latlong_base.x)
+	save_file.set_value("Cords","Lat", latlong_base.z)
+	if save_file.save(SavePath.Last_Pos_Source):
+		print("An error happened while saving data")
+
+func add_Trace() -> void:
+	var spatialine = preload("res://Components/SpatiaLine.tscn")
+	var instance = spatialine.instantiate()
+	instance.width_radius = 0.8
+	$Map/Physical/TracePath.add_child(instance)
+	instance.set_target(subtle_pos)
+	instance.set_base(last_pos)
+	instance.set_Color(Color("82b27891"))
+	trace_saved.emit(subtle_pos)
+
+func add_TraceByPos(pos : Vector3) -> void:
+	var spatialine = preload("res://Components/SpatiaLine.tscn")
+	var instance = spatialine.instantiate()
+	instance.width_radius = 0.8
+	$Map/Physical/TracePath.add_child(instance)
+	instance.set_target(pos)
+	instance.set_base(last_read_pos)
+	instance.set_Color(Color("82b27891"))
+	last_read_pos = pos
 
 
-
-func _on_stat_panel_map_update(data: Dictionary) -> void:
+func _on_stat_panel_map_update(data : Dictionary) -> void:
 	#print("LatLong: " + str(Vector2(float(data["Lat"]), float(data["Long"]))))
-	$Map/Physical/CanSat.position = latlong_to_meters(Vector3( float(data["Long"]), float(data["Height"]), float(data["Lat"])))
-	$Map/Physical/CanSat/Label3D.text = ".             Long:" + data["Long"] + "\n.             Lat:" + data["Lat"] + "\n.             Height:" + data["Height"] + ".             Speed:" + data["Speed"]
+	$Map/Physical/CanSat.position = latlong_to_meters(Vector3( data["Long"], data["Height"], data["Lat"]))
+	$Map/Physical/CanSat/Label3D.text = ".             Long:" + "%0.2f" % data["Long"] + "\n.             Lat:" + "%0.2f" % data["Lat"] + "\n.             Height:" + "%0.2f" % data["Height"] + "\n.             Speed:" + "%0.2f" % Speed + "\n.             Distance:" + "%0.2f" % Distance
 	#$Map/Physical/CanSat.position += Vector3(2,1,1)
 	update_poles()
+
+func _on_subtle_map_update(data : Dictionary):
+	last_pos = subtle_pos
+	subtle_pos = latlong_to_meters(Vector3( data["Long"], data["Height"], data["Lat"]))
+	#send_data(subtle_pos, 20)
+	Pos = subtle_pos
+	Speed = calc_Speed()
+	Distance = subtle_pos.length()
+
+func calc_Speed() -> float:
+	var result : Vector3
+	result = subtle_pos - last_pos
+	return result.length()
 
 func _on_base_gps_long_update(val: String) -> void:
 	latlong_base.x = float(val)
@@ -62,14 +119,14 @@ func _on_base_gps_lat_update(val: String) -> void:
 	CORD_STEP_SCALE_LONG = CORD_STEP_SCALE_LAT * cos(latlong_base.z * 0.0174532925199)
 
 func _on_base_gps_map_update() -> void:
-	last_open_data.Last_Pos = Vector2(latlong_base.x, latlong_base.z)
+	save_Cords();
 	var map_generator : Thread = Thread.new()
 	map_generator.start(generate_map.bind(Vector2(latlong_base.x, latlong_base.z)))
 
 func generate_map(cords : Vector2):
-	var ball = []
-	OS.execute("python", ["Scripts/EEmap.py", cords.x, cords.y], ball, true, true)
-	print(ball)
+	var error = []
+	OS.execute("python", ["Scripts/EEmap.py", cords.x, cords.y], error, true, false)
+	print(error)
 	call_deferred("emit_signal", "map_generated")
 
 
@@ -99,6 +156,18 @@ func _on_base_gps_focus_update(val: int) -> void:
 	$Map.reparent_Anchor(val)
 
 
+func _on_stat_panel_point_added() -> void:
+	add_Trace()
+
+
+func _on_stat_panel_point_readed(data: Vector3) -> void:
+	add_TraceByPos(data)
+
+func _on_stat_panel_clear_points() -> void:
+	$Map/Physical/CanSat.position = Vector3.ZERO
+	for n in $Map/Physical/TracePath.get_children():
+		$Map/Physical/TracePath.remove_child(n)
+		n.queue_free()
 
 #func MapOSM_update():
 	#var http_request = HTTPRequest.new()

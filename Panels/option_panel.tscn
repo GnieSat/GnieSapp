@@ -33,6 +33,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(4, 86), Vector2(4, 168), Vector2(58, 168)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TabContainer/Analyze/ButtonLoad:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 86), Vector2(4, 168), Vector2(31, 168)]
+}
 
 [sub_resource type="Animation" id="Animation_nj5sh"]
 length = 0.001
@@ -60,6 +72,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(4, 86)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TabContainer/Analyze/ButtonLoad:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 86)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8sc2l"]
 _data = {
@@ -77,8 +101,8 @@ texture = ExtResource("3_r7p21")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 offset_left = -155.0
-offset_top = -222.0
-offset_right = 311.0
+offset_top = -223.0
+offset_right = 826.0
 offset_bottom = 45.0
 mouse_filter = 2
 current_tab = 0
@@ -112,6 +136,54 @@ metadata/_tab_index = 0
 [node name="Button" parent="TabContainer/Active" instance=ExtResource("5_b15or")]
 position = Vector2(85, 168)
 
+[node name="ButtonPORT" parent="TabContainer/Active" instance=ExtResource("5_ffeht")]
+position = Vector2(254.675, 199.39)
+Name = "[center]Port A[/center]"
+
+[node name="RichTextLabel" parent="TabContainer/Active/ButtonPORT" index="1"]
+offset_left = -55.675
+offset_top = -25.39
+offset_right = -7.15
+offset_bottom = 0.83
+text = "[center]Port A[center]"
+
+[node name="LineEdit" parent="TabContainer/Active/ButtonPORT" index="3"]
+offset_left = -73.0
+text = "COM3"
+placeholder_text = "PORT"
+
+[node name="ButtonPORT2" parent="TabContainer/Active" instance=ExtResource("5_ffeht")]
+position = Vector2(367.245, 199.865)
+Name = "[center]Port B[/center]"
+
+[node name="RichTextLabel" parent="TabContainer/Active/ButtonPORT2" index="1"]
+offset_left = -56.245
+offset_top = -24.865
+offset_right = -7.71999
+offset_bottom = 1.35498
+text = "[center]PartB[/center]"
+
+[node name="LineEdit" parent="TabContainer/Active/ButtonPORT2" index="3"]
+offset_left = -73.0
+text = "COM3"
+placeholder_text = "PORT"
+
+[node name="ButtonPORT3" parent="TabContainer/Active" instance=ExtResource("5_ffeht")]
+position = Vector2(482.85, 198.99)
+Name = "[center]Port C[/center]"
+
+[node name="RichTextLabel" parent="TabContainer/Active/ButtonPORT3" index="1"]
+offset_left = -54.85
+offset_top = -24.99
+offset_right = -6.325
+offset_bottom = 1.22999
+text = "[center]Port C[/center]"
+
+[node name="LineEdit" parent="TabContainer/Active/ButtonPORT3" index="3"]
+offset_left = -73.0
+text = "COM3"
+placeholder_text = "PORT"
+
 [node name="ButtonStop" parent="TabContainer/Active" instance=ExtResource("4_uo2hb")]
 position = Vector2(4, 86)
 Name = "[center]||[/center]"
@@ -142,33 +214,41 @@ offset_bottom = 25.36
 rotation = 1.5708
 text = "[center]Δ[/center]"
 
-[node name="ButtonPORT" parent="TabContainer/Active" instance=ExtResource("5_ffeht")]
-position = Vector2(262.955, 166.865)
-
-[node name="LineEdit" parent="TabContainer/Active/ButtonPORT" index="3"]
-offset_left = -73.0
-text = "COM3"
-placeholder_text = "PORT"
-
 [node name="WriteType" type="Node2D" parent="TabContainer/Active"]
+position = Vector2(215.7, 6.755)
 
 [node name="Label" type="Label" parent="TabContainer/Active/WriteType"]
-offset_left = 308.0
-offset_top = 169.0
-offset_right = 348.0
-offset_bottom = 192.0
+offset_left = 310.0
+offset_top = 165.0
+offset_right = 391.0
+offset_bottom = 188.0
 text = "Write type"
 
 [node name="OptionButton" type="OptionButton" parent="TabContainer/Active/WriteType"]
 offset_left = 310.0
-offset_top = 194.0
-offset_right = 388.0
-offset_bottom = 214.0
+offset_top = 187.0
+offset_right = 420.0
+offset_bottom = 218.0
 selected = 0
 item_count = 2
-popup/item_0/text = "Overwrite"
-popup/item_1/text = "Add"
-popup/item_1/id = 1
+popup/item_0/text = "Add"
+popup/item_0/id = 3
+popup/item_1/text = "Overwrite"
+popup/item_1/id = 7
+
+[node name="Reminder" type="Label" parent="TabContainer/Active/WriteType"]
+offset_left = 313.0
+offset_top = 215.0
+offset_right = 353.0
+offset_bottom = 238.0
+
+[node name="AntennaName" type="Label" parent="TabContainer/Active"]
+layout_mode = 0
+offset_left = 678.0
+offset_top = 172.0
+offset_right = 981.0
+offset_bottom = 195.0
+text = "Data current sender: "
 
 [node name="Analyze" type="TabBar" parent="TabContainer"]
 visible = false
@@ -178,7 +258,7 @@ tab_alignment = 1
 metadata/_tab_index = 1
 
 [node name="Button" parent="TabContainer/Analyze" instance=ExtResource("5_b15or")]
-position = Vector2(120, 170)
+position = Vector2(58, 168)
 
 [node name="ButtonLoad" parent="TabContainer/Analyze" instance=ExtResource("4_uo2hb")]
 position = Vector2(4, 86)
@@ -195,6 +275,15 @@ offset_bottom = 26.36
 rotation = 1.5708
 text = "[center]Δ[/center]"
 
+[node name="Button2" type="Button" parent="TabContainer/Analyze"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 169.0
+offset_right = 372.0
+offset_bottom = 198.0
+theme_override_font_sizes/font_size = 12
+text = "Get Timestamp from slider position"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_8sc2l")
@@ -202,15 +291,20 @@ libraries = {
 
 [connection signal="on_pressed" from="TabContainer/ExtendButton" to="." method="_on_extend_button_on_pressed"]
 [connection signal="save" from="TabContainer/Active/Button" to="." method="_on_buttonSave_save"]
+[connection signal="pressedtext" from="TabContainer/Active/ButtonPORT" to="." method="_on_button_port_pressedtext"]
+[connection signal="pressedtext" from="TabContainer/Active/ButtonPORT2" to="." method="_on_button_port_2_pressedtext"]
+[connection signal="pressedtext" from="TabContainer/Active/ButtonPORT3" to="." method="_on_button_port_3_pressedtext"]
 [connection signal="on_pressed" from="TabContainer/Active/ButtonStop" to="." method="_on_button_2_on_pressed"]
 [connection signal="on_pressed" from="TabContainer/Active/ButtonStart" to="." method="_on_button_on_pressed"]
-[connection signal="pressedtext" from="TabContainer/Active/ButtonPORT" to="." method="_on_button_port_pressedtext"]
 [connection signal="item_selected" from="TabContainer/Active/WriteType/OptionButton" to="." method="_on_WriteType_selected"]
 [connection signal="save" from="TabContainer/Analyze/Button" to="." method="_on_buttonLoad_save"]
 [connection signal="on_pressed" from="TabContainer/Analyze/ButtonLoad" to="." method="_on_button_load_on_pressed"]
+[connection signal="pressed" from="TabContainer/Analyze/Button2" to="." method="_on_Timestamp_pressed"]
 
 [editable path="TabContainer/ExtendButton"]
+[editable path="TabContainer/Active/ButtonPORT"]
+[editable path="TabContainer/Active/ButtonPORT2"]
+[editable path="TabContainer/Active/ButtonPORT3"]
 [editable path="TabContainer/Active/ButtonStop"]
 [editable path="TabContainer/Active/ButtonStart"]
-[editable path="TabContainer/Active/ButtonPORT"]
 [editable path="TabContainer/Analyze/ButtonLoad"]

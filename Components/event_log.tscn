@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://7shxoggytbt2"]
+
+[ext_resource type="Script" path="res://GDS/event_log.gd" id="1_3vqbo"]
+[ext_resource type="Texture2D" uid="uid://dom3n6fp1qv3l" path="res://Resources/Textures/colorblock.png" id="2_kr368"]
+
+[node name="EventLog" type="Node2D"]
+script = ExtResource("1_3vqbo")
+
+[node name="Colorblock" type="Sprite2D" parent="."]
+modulate = Color(0.2314, 0.250943, 0.26, 1)
+position = Vector2(104, 61)
+scale = Vector2(2.08, 1.22)
+texture = ExtResource("2_kr368")
+
+[node name="Label" type="RichTextLabel" parent="."]
+modulate = Color(0.65, 0.65, 0.65, 1)
+offset_right = 289.0
+offset_bottom = 169.0
+scale = Vector2(0.72, 0.72)
+focus_mode = 2
+scroll_following = true
+selection_enabled = true

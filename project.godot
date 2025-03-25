@@ -15,10 +15,15 @@ run/main_scene="res://Screen.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Logger="*res://GDS/Logger.gd"
+
 [display]
 
-window/size/viewport_width=1904
-window/size/viewport_height=1011
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"

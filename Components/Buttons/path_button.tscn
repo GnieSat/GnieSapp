@@ -27,6 +27,7 @@ scale = Vector2(0.525, 0.38)
 Name = "[center]...[/center]"
 
 [node name="Button" parent="PathNameButton" index="0"]
+visible = false
 offset_left = 30.98
 offset_top = -30.665
 offset_right = 1283.98
@@ -34,6 +35,7 @@ offset_bottom = 462.335
 scale = Vector2(0.045, 0.085)
 
 [node name="RichTextLabel" parent="PathNameButton" index="1"]
+visible = false
 offset_left = -74.5998
 offset_top = -68.4214
 offset_right = 4.31017
@@ -42,10 +44,10 @@ scale = Vector2(3.43, 3.43)
 text = "[center]...[/center]"
 
 [node name="PathName" type="RichTextLabel" parent="." index="4"]
-offset_left = 109.0
-offset_top = 12.0
-offset_right = 109.0
-offset_bottom = 39.0
+offset_left = 1.1
+offset_top = 31.38
+offset_right = 1.1
+offset_bottom = 58.38
 text = "res://Resources/Saves/test.json"
 scroll_active = false
 autowrap_mode = 0

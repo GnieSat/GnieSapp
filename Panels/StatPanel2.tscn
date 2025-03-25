@@ -1,0 +1,444 @@
+[gd_scene load_steps=33 format=3 uid="uid://6b5bcghgrbsj"]
+
+[ext_resource type="Script" path="res://GDS/2stat_panel.gd" id="1_yurnn"]
+[ext_resource type="PackedScene" uid="uid://lmxnr6tn7k10" path="res://Components/json_handle.tscn" id="2_0nbk4"]
+[ext_resource type="PackedScene" uid="uid://ciqwminnxrcye" path="res://Components/DragComponent2.tscn" id="3_7td77"]
+[ext_resource type="PackedScene" uid="uid://bhuwwjnnotsr1" path="res://Panels/option_panel.tscn" id="4_mfvty"]
+[ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="5_wqmrw"]
+[ext_resource type="PackedScene" uid="uid://b5plp8bouknsx" path="res://Components/ArduinoReader.tscn" id="6_fiqh3"]
+[ext_resource type="PackedScene" uid="uid://bebvflxa8dens" path="res://Components/StatDoubleBox.tscn" id="7_pavqr"]
+[ext_resource type="Resource" uid="uid://b3nu4onbkdpk0" path="res://Resources/Stats/DataSource.tres" id="8_u8gk8"]
+[ext_resource type="PackedScene" uid="uid://doi0im6c1sf1a" path="res://Components/Battery.tscn" id="9_ngiu7"]
+[ext_resource type="PackedScene" uid="uid://r6i6w7yauut5" path="res://Components/data_chart.tscn" id="10_ee1rt"]
+[ext_resource type="PackedScene" uid="uid://conuwlqiu6uyg" path="res://Components/chart_2.tscn" id="11_fqbtg"]
+[ext_resource type="Texture2D" uid="uid://cnyn506qkq8ok" path="res://Resources/Textures/OK.png" id="12_vca35"]
+[ext_resource type="PackedScene" uid="uid://dpgx3xkwqc5ud" path="res://Components/imager.tscn" id="13_s5kdc"]
+[ext_resource type="PackedScene" uid="uid://6h2awvbp3nj0" path="res://Components/math.tscn" id="14_ysa1c"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k7thx"]
+animation = &"Extend"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cpuh2"]
+animation = &"Extend"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1qco5"]
+animation = &"PopOut"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jitrg"]
+animation = &"PopOut"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qckwt"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3yi04"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y0qgo"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t85ot"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jcrva"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s5gl1"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3fj8"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7rg6q"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fylm3"]
+states/Extend/node = SubResource("AnimationNodeAnimation_cpuh2")
+states/Extend/position = Vector2(681, 70)
+"states/Extend BW/node" = SubResource("AnimationNodeAnimation_k7thx")
+"states/Extend BW/position" = Vector2(681, 157)
+states/PopOut/node = SubResource("AnimationNodeAnimation_jitrg")
+states/PopOut/position = Vector2(424, 70)
+"states/PopOut BW/node" = SubResource("AnimationNodeAnimation_1qco5")
+"states/PopOut BW/position" = Vector2(424, 157)
+states/Start/position = Vector2(226, 95)
+transitions = ["PopOut BW", "PopOut", SubResource("AnimationNodeStateMachineTransition_qckwt"), "PopOut", "Extend", SubResource("AnimationNodeStateMachineTransition_3yi04"), "Extend", "Extend BW", SubResource("AnimationNodeStateMachineTransition_y0qgo"), "Extend BW", "PopOut BW", SubResource("AnimationNodeStateMachineTransition_t85ot"), "Start", "PopOut", SubResource("AnimationNodeStateMachineTransition_jcrva"), "PopOut", "PopOut BW", SubResource("AnimationNodeStateMachineTransition_s5gl1"), "Extend BW", "Extend", SubResource("AnimationNodeStateMachineTransition_c3fj8"), "Extend BW", "PopOut", SubResource("AnimationNodeStateMachineTransition_7rg6q")]
+
+[sub_resource type="Animation" id="Animation_weviv"]
+resource_name = "Extend"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DragComponent2/Node/OptionPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-34, 221.378), Vector2(-34, 293), Vector2(-2.174, 293)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DragComponent2:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1012, 236), Vector2(980, 236), Vector2(980, 310)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DragComponent2:SCALE_FACTOR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-0.85, 0.85), Vector2(-0.85, 0.87)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../DragComponent2/Area2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.228, 1), Vector2(1.188, 1.3)]
+}
+
+[sub_resource type="Animation" id="Animation_14txr"]
+resource_name = "PopOut"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DragComponent2/Node/OptionPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-2.174, 221.378), Vector2(-34, 221)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DragComponent2:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(980, 237), Vector2(1012, 237)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DragComponent2/Area2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.188, 1), Vector2(1.228, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tx2s3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../DragComponent2/Node/OptionPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2.174, 221.403)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DragComponent2:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(980, 236)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DragComponent2:SCALE_FACTOR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.85, 0.85)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../DragComponent2/Area2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.188, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3erw1"]
+_data = {
+"Extend": SubResource("Animation_weviv"),
+"PopOut": SubResource("Animation_14txr"),
+"RESET": SubResource("Animation_tx2s3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvvf0"]
+size = Vector2(823.776, 237.763)
+
+[node name="StatPanel2" type="Node2D"]
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_yurnn")
+
+[node name="JsonHandle" parent="." instance=ExtResource("2_0nbk4")]
+position = Vector2(-1, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeStateMachine_fylm3")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationTree"]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_3erw1")
+}
+
+[node name="DragComponent2" parent="." instance=ExtResource("3_7td77")]
+show_behind_parent = true
+offset_top = 0.0
+offset_right = 980.0
+offset_bottom = 236.0
+scale = Vector2(-1, 1)
+SCALE_FACTOR = Vector2(-0.85, 0.85)
+
+[node name="Area2D" type="Area2D" parent="DragComponent2"]
+position = Vector2(1, 0)
+scale = Vector2(1.188, 1)
+monitorable = false
+
+[node name="MainCol" type="CollisionShape2D" parent="DragComponent2/Area2D"]
+position = Vector2(411.888, 118.881)
+shape = SubResource("RectangleShape2D_uvvf0")
+
+[node name="Node" type="Node2D" parent="DragComponent2"]
+position = Vector2(823, 2)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="OptionPanel" parent="DragComponent2/Node" instance=ExtResource("4_mfvty")]
+position = Vector2(-2.174, 221.403)
+
+[node name="Container" type="Node2D" parent="DragComponent2/Node"]
+
+[node name="TitleBox" type="Sprite2D" parent="DragComponent2/Node/Container"]
+position = Vector2(333.086, 117)
+scale = Vector2(0.781487, 0.479589)
+texture = ExtResource("5_wqmrw")
+
+[node name="Container" type="Container" parent="DragComponent2/Node/Container"]
+offset_left = -156.0
+offset_right = 822.0
+offset_bottom = 232.0
+
+[node name="ArduinoReader" parent="DragComponent2/Node/Container" instance=ExtResource("6_fiqh3")]
+visible = false
+modulate = Color(0.762404, 0.762404, 0.762404, 1)
+position = Vector2(-129.447, 189.609)
+
+[node name="Gas1" parent="DragComponent2/Node/Container" instance=ExtResource("7_pavqr")]
+offset_left = 393.629
+offset_top = 2.19481
+offset_right = 559.629
+offset_bottom = 66.1948
+VSource = ExtResource("8_u8gk8")
+Name = "CO"
+UnitName = "%"
+
+[node name="Humidity" parent="DragComponent2/Node/Container" instance=ExtResource("7_pavqr")]
+offset_left = 256.566
+offset_top = 2.19516
+offset_right = 422.566
+offset_bottom = 66.1952
+VSource = ExtResource("8_u8gk8")
+Name = "Humidity"
+UnitName = "%RH"
+
+[node name="Radiation" parent="DragComponent2/Node/Container" instance=ExtResource("7_pavqr")]
+offset_left = 119.503
+offset_top = 2.19551
+offset_right = 285.503
+offset_bottom = 66.1955
+VSource = ExtResource("8_u8gk8")
+Name = "Radiation"
+UnitName = "CPS"
+
+[node name="Pressure" parent="DragComponent2/Node/Container" instance=ExtResource("7_pavqr")]
+offset_left = -17.5596
+offset_top = 2.19586
+offset_right = 148.44
+offset_bottom = 66.1959
+VSource = ExtResource("8_u8gk8")
+Name = "Pressure"
+UnitName = "hPa"
+
+[node name="Temperature" parent="DragComponent2/Node/Container" instance=ExtResource("7_pavqr")]
+offset_left = -153.224
+offset_top = 2.1962
+offset_right = 12.7764
+offset_bottom = 66.1962
+VSource = ExtResource("8_u8gk8")
+Name = "Temperature"
+UnitName = "°C"
+
+[node name="Gas2" parent="DragComponent2/Node/Container" instance=ExtResource("7_pavqr")]
+offset_left = 530.692
+offset_top = 2.19447
+offset_right = 696.692
+offset_bottom = 66.1945
+VSource = ExtResource("8_u8gk8")
+Name = "NO2"
+UnitName = "%"
+
+[node name="Battery" parent="DragComponent2/Node/Container" instance=ExtResource("9_ngiu7")]
+offset_left = 678.294
+offset_top = 6.23357
+offset_right = 812.294
+offset_bottom = 131.234
+
+[node name="DataSlider" type="HSlider" parent="DragComponent2/Node/Container"]
+anchors_preset = -1
+anchor_left = 0.503038
+anchor_top = 0.497872
+anchor_right = 0.503038
+anchor_bottom = 0.497872
+offset_left = -152.294
+offset_top = 188.589
+offset_right = 664.026
+offset_bottom = 209.004
+size_flags_vertical = 8
+max_value = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Label" parent="DragComponent2/Node/Container/DataSlider"]
+layout_mode = 0
+offset_left = 30.5883
+offset_top = 19.9999
+offset_right = 428.588
+offset_bottom = 42.9999
+text = "Time:"
+
+[node name="ChartTemperature" type="Node2D" parent="DragComponent2/Node/Container"]
+visible = false
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="DragComponent2/Node/Container/ChartTemperature"]
+anchors_preset = -1
+anchor_left = 0.499392
+anchor_top = 0.493617
+anchor_right = 0.499392
+anchor_bottom = 0.493617
+offset_left = -150.426
+offset_top = 59.5388
+offset_right = 637.573
+offset_bottom = 162.539
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer"]
+handle_input_locally = false
+gui_disable_input = true
+size = Vector2i(788, 103)
+size_2d_override = Vector2i(1135, 80)
+size_2d_override_stretch = true
+render_target_update_mode = 0
+
+[node name="DataChart" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer/SubViewport" instance=ExtResource("10_ee1rt")]
+scale = Vector2(9.09, 9.09)
+
+[node name="Camera2D" type="Camera2D" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer/SubViewport"]
+position = Vector2(7626, 1306)
+offset = Vector2(-14.98, -158.195)
+zoom = Vector2(0.085, 0.098)
+
+[node name="Chart2" parent="DragComponent2/Node/Container" instance=ExtResource("11_fqbtg")]
+position = Vector2(-152.294, 59.1769)
+scale = Vector2(0.375, 0.375)
+
+[node name="ChartName" type="Label" parent="DragComponent2/Node/Container"]
+offset_left = -151.0
+offset_top = 164.0
+offset_right = 121.0
+offset_bottom = 187.0
+text = "Current chart: Temperature"
+
+[node name="StabilityState" type="Sprite2D" parent="DragComponent2/Node"]
+position = Vector2(-141.705, 220.353)
+scale = Vector2(0.263424, 0.263424)
+texture = ExtResource("12_vca35")
+
+[node name="Imager" parent="DragComponent2" instance=ExtResource("13_s5kdc")]
+position = Vector2(151.765, 164.706)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Sounder" parent="DragComponent2" instance=ExtResource("13_s5kdc")]
+position = Vector2(150.588, 209.412)
+scale = Vector2(-1, 1)
+WorkMode = 1
+
+[node name="Math" parent="." instance=ExtResource("14_ysa1c")]
+
+[connection signal="start_load" from="JsonHandle" to="." method="_on_json_handle_start_load"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="focus_entered" from="DragComponent2" to="." method="_on_drag_component_2_focus_entered"]
+[connection signal="focus_exited" from="DragComponent2" to="." method="_on_drag_component_2_focus_exited"]
+[connection signal="mouse_entered" from="DragComponent2/Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="DragComponent2/Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="PortChange" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_port_change"]
+[connection signal="TimestampRequest" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_timestamp_request"]
+[connection signal="WriteType_change" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_write_type_change"]
+[connection signal="maximize" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_maximize"]
+[connection signal="minimize" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_minimize"]
+[connection signal="OnError" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_error"]
+[connection signal="OnLackData" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_lack_data"]
+[connection signal="OnUpdate" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_update"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Gas1" to="." method="_on_gas_1_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Humidity" to="." method="_on_humidity_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Radiation" to="." method="_on_radiation_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Pressure" to="." method="_on_pressure_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Temperature" to="." method="_on_temperature_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Gas2" to="." method="_on_gas_2_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Battery" to="." method="_on_battery_pressed"]
+[connection signal="changed" from="DragComponent2/Node/Container/DataSlider" to="." method="_on_data_slider_changed"]
+[connection signal="value_changed" from="DragComponent2/Node/Container/DataSlider" to="." method="_on_data_slider_value_changed"]

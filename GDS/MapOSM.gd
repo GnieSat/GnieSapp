@@ -13,8 +13,9 @@ func extend_by_value(size : Rect2) -> void:
 	region_rect = size
 
 func update_map() -> void:
-	texture = ImageTexture.create_from_image(Image.load_from_file("W:/kitus/Documents/GitHub/GnieSapp/NewMap.png"))
-	print("Sigiel")
+	texture = ImageTexture.create_from_image(Image.load_from_file("NewMap.png"))
+	Logger.add_Log("- Map should be loaded")
+	
 
 func _on_timer_timeout() -> void:
 	update_map()

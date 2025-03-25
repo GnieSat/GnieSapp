@@ -1,4 +1,4 @@
 extends Resource
-class_name LastOpenData
+class_name SaveFilePath
 
-@export var Last_Pos : Vector2
+@export var Last_Pos_Source : String

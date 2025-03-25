@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx2ehaa3uqc26"]
+[gd_scene load_steps=10 format=3 uid="uid://dx2ehaa3uqc26"]
 
 [ext_resource type="Script" path="res://GDS/base_gps.gd" id="1_syq05"]
+[ext_resource type="Resource" uid="uid://bwp4uy2mwdjyk" path="res://Resources/Stats/SaveFilePath.tres" id="2_3nggb"]
 [ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="2_kkifl"]
 [ext_resource type="PackedScene" uid="uid://caxnk7kv5g7wk" path="res://Components/Buttons/buttontext.tscn" id="3_ghb5n"]
 [ext_resource type="PackedScene" uid="uid://0d2wmeddwq42" path="res://Components/Buttons/button.tscn" id="4_2nwma"]
+[ext_resource type="PackedScene" uid="uid://7shxoggytbt2" path="res://Components/event_log.tscn" id="6_ttp1u"]
 
 [sub_resource type="Animation" id="Animation_0y0oa"]
 resource_name = "Extend"
@@ -18,7 +20,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 78), Vector2(0, -46)]
+"values": [Vector2(0, 78), Vector2(0, -53)]
 }
 
 [sub_resource type="Animation" id="Animation_dca1i"]
@@ -44,6 +46,7 @@ _data = {
 
 [node name="BaseGPS" type="Node2D"]
 script = ExtResource("1_syq05")
+save_path = ExtResource("2_3nggb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -73,9 +76,9 @@ position = Vector2(0, -6.095)
 
 [node name="OptionButton" type="OptionButton" parent="BaseGPS/MapScale"]
 offset_left = 195.0
-offset_top = -27.0
+offset_top = -29.905
 offset_right = 297.0
-offset_bottom = 4.0
+offset_bottom = 1.095
 selected = 0
 item_count = 5
 popup/item_0/text = "2x2km"
@@ -171,9 +174,9 @@ text = "CanSat Model Type"
 
 [node name="OptionButton" type="OptionButton" parent="BaseGPS/Model"]
 offset_left = 308.0
-offset_top = 51.0
+offset_top = 48.135
 offset_right = 449.0
-offset_bottom = 82.0
+offset_bottom = 79.135
 selected = 0
 item_count = 2
 popup/item_0/text = "3D Cylinder"
@@ -185,21 +188,24 @@ position = Vector2(0, -29.79)
 
 [node name="Label" type="Label" parent="BaseGPS/Focus"]
 offset_left = 305.0
-offset_top = 25.0
-offset_right = 345.0
-offset_bottom = 48.0
+offset_top = 22.79
+offset_right = 414.0
+offset_bottom = 45.79
 text = "Camera Focus"
 
 [node name="OptionButton" type="OptionButton" parent="BaseGPS/Focus"]
-offset_left = 308.0
-offset_top = 51.0
-offset_right = 449.0
-offset_bottom = 82.0
+offset_left = 307.0
+offset_top = 45.79
+offset_right = 448.0
+offset_bottom = 76.79
 selected = 0
 item_count = 2
 popup/item_0/text = "Center"
 popup/item_1/text = "CanSat"
 popup/item_1/id = 1
+
+[node name="EventLog" parent="BaseGPS" instance=ExtResource("6_ttp1u")]
+position = Vector2(470, -75)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 270.0

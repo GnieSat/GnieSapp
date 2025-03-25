@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7rap1avjeir7"]
+
+[ext_resource type="Script" path="res://GDS/screen.gd" id="1_xhwp1"]
+[ext_resource type="PackedScene" uid="uid://sihegnjhkdoa" path="res://Panels/StatPanel.tscn" id="1_y1fu4"]
+[ext_resource type="Resource" uid="uid://bwp4uy2mwdjyk" path="res://Resources/Stats/SaveFilePath.tres" id="3_7v8wf"]
+[ext_resource type="PackedScene" uid="uid://dvtj3m146qc5k" path="res://Panels/MapViewPort.tscn" id="3_hv4pp"]
+[ext_resource type="PackedScene" uid="uid://dx2ehaa3uqc26" path="res://Components/base_gps.tscn" id="5_ksuhr"]
+
+[node name="Screen" type="Node2D"]
+script = ExtResource("1_xhwp1")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -10.0
+offset_top = -1.0
+offset_right = 1260.0
+offset_bottom = 712.0
+stretch = true
+
+[node name="MapViewport" parent="SubViewportContainer" instance=ExtResource("3_hv4pp")]
+handle_input_locally = false
+size = Vector2i(1270, 713)
+render_target_update_mode = 4
+SavePath = ExtResource("3_7v8wf")
+
+[node name="StatPanel" parent="." instance=ExtResource("1_y1fu4")]
+position = Vector2(979, 493)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(630, 356)
+zoom = Vector2(1.515, 1.515)
+
+[node name="BaseGPS" parent="." instance=ExtResource("5_ksuhr")]
+position = Vector2(90, 690)
+
+[connection signal="trace_saved" from="SubViewportContainer/MapViewport" to="StatPanel" method="_on_map_viewport_trace_saved"]
+[connection signal="ClearPoints" from="StatPanel" to="SubViewportContainer/MapViewport" method="_on_stat_panel_clear_points"]
+[connection signal="MapUpdate" from="StatPanel" to="SubViewportContainer/MapViewport" method="_on_stat_panel_map_update"]
+[connection signal="PointAdded" from="StatPanel" to="SubViewportContainer/MapViewport" method="_on_stat_panel_point_added"]
+[connection signal="PointReaded" from="StatPanel" to="SubViewportContainer/MapViewport" method="_on_stat_panel_point_readed"]
+[connection signal="SubtleMapUpdate" from="StatPanel" to="SubViewportContainer/MapViewport" method="_on_subtle_map_update"]
+[connection signal="focus_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_focus_update"]
+[connection signal="lat_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_lat_update"]
+[connection signal="long_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_long_update"]
+[connection signal="map_range_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_map_range_update"]
+[connection signal="map_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_map_update"]
+[connection signal="model_update" from="BaseGPS" to="SubViewportContainer/MapViewport" method="_on_base_gps_model_update"]

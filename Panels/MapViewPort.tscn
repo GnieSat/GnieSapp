@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvtj3m146qc5k"]
+[gd_scene load_steps=3 format=3 uid="uid://dvtj3m146qc5k"]
 
 [ext_resource type="PackedScene" uid="uid://vu0kqsgqdtnm" path="res://Panels/map.tscn" id="1_vqxrl"]
 [ext_resource type="Script" path="res://GDS/map.gd" id="2_6dnax"]
-[ext_resource type="Resource" uid="uid://b386mwstlxbe3" path="res://Resources/Stats/LastData.tres" id="2_c1aon"]
 
 [node name="MapViewport" type="SubViewport"]
 script = ExtResource("2_6dnax")
-last_open_data = ExtResource("2_c1aon")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 

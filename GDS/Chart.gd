@@ -11,7 +11,7 @@ func _ready():
 	
 	# And our y values. It can be an n-size array of arrays.
 	# NOTE: `x.size() == y.size()` or `x.size() == y[n].size()`
-	var y: Array = ArrayOperations.multiply_int(ArrayOperations.cos(x), 1)
+	var y: Array = ArrayOperations.multiply_int(ArrayOperations.add_int(x,0), 20)
 	
 	# Let's customize the chart properties, which specify how the chart
 	# should look, plus some additional elements like labels, the scale, etc...
@@ -63,7 +63,7 @@ func _process(_delta: float):
 	# we can use the `Function.add_point(x, y)` method to update a function
 	f1.add_point(new_val, randi() % 2)
 	f1.remove_point(0)
-	if new_val >= 100:
+	if new_val >= 1000:
 		set_process(false)
 	chart.queue_redraw() # This will force the Chart to be updated
 

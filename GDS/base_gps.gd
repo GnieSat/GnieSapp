@@ -11,13 +11,21 @@ signal map_range_update(val: int)
 signal model_update(val : int)
 signal focus_update(val : int)
 
+@export var save_path : SaveFilePath = null
+
 var is_extended = false
 
-@export var last_open_data : LastOpenData = null
-
 func _ready() -> void:
-	$BaseGPS/GPSLocation/Long/LineEdit.text = str(last_open_data.Last_Pos.x)
-	$BaseGPS/GPSLocation/Lat/LineEdit.text = str(last_open_data.Last_Pos.y)
+	var save_file := ConfigFile.new()
+	var error := save_file.load(save_path.Last_Pos_Source)
+	
+	if error:
+		print("An error happened while loading data: ", error)
+		return
+	$BaseGPS/GPSLocation/Long/LineEdit.text = str(save_file.get_value("Cords", "Long"))
+	$BaseGPS/GPSLocation/Lat/LineEdit.text = str(save_file.get_value("Cords", "Lat"))
+	long_update.emit(str(save_file.get_value("Cords", "Long")))
+	lat_update.emit(str(save_file.get_value("Cords", "Lat")))
 
 func _on_button_pressed() -> void:
 	if is_extended:

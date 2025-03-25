@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SaveFilePath" load_steps=2 format=3 uid="uid://bwp4uy2mwdjyk"]
+
+[ext_resource type="Script" path="res://Resources/Stats/Classes/LastCords.gd" id="1_s3btt"]
+
+[resource]
+script = ExtResource("1_s3btt")
+Last_Pos_Source = "save_data.ini"

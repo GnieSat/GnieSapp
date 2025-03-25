@@ -1,6 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://sihegnjhkdoa"]
+[gd_scene load_steps=33 format=3 uid="uid://sihegnjhkdoa"]
 
-[ext_resource type="Script" path="res://GDS/stat_panel.gd" id="1_wtmpy"]
+[ext_resource type="Script" path="res://GDS/2stat_panel.gd" id="1_y14vp"]
 [ext_resource type="PackedScene" uid="uid://ciqwminnxrcye" path="res://Components/DragComponent2.tscn" id="2_3m6cf"]
 [ext_resource type="Texture2D" uid="uid://c4pfec6vgik56" path="res://Resources/Textures/TitleBox.png" id="2_6s1v3"]
 [ext_resource type="PackedScene" uid="uid://b5plp8bouknsx" path="res://Components/ArduinoReader.tscn" id="3_tk0wr"]
@@ -9,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://lmxnr6tn7k10" path="res://Components/json_handle.tscn" id="6_mygmc"]
 [ext_resource type="PackedScene" uid="uid://r6i6w7yauut5" path="res://Components/data_chart.tscn" id="8_coi6w"]
 [ext_resource type="PackedScene" uid="uid://bhuwwjnnotsr1" path="res://Panels/option_panel.tscn" id="10_42lye"]
+[ext_resource type="PackedScene" uid="uid://conuwlqiu6uyg" path="res://Components/chart_2.tscn" id="11_3jb0q"]
 [ext_resource type="Texture2D" uid="uid://cnyn506qkq8ok" path="res://Resources/Textures/OK.png" id="11_8jnps"]
 [ext_resource type="PackedScene" uid="uid://bxpd4b0mu1q5v" path="res://Components/stat_double_box_Light.tscn" id="12_pd45l"]
+[ext_resource type="PackedScene" uid="uid://6h2awvbp3nj0" path="res://Components/math.tscn" id="12_up08r"]
+[ext_resource type="PackedScene" uid="uid://dpgx3xkwqc5ud" path="res://Components/imager.tscn" id="13_11qdi"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k7thx"]
 animation = &"Extend"
@@ -99,7 +102,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-0.71, 0.705), Vector2(-0.71, 0.718)]
+"values": [Vector2(-0.85, 0.85), Vector2(-0.85, 0.87)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -190,7 +193,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-0.71, 0.705)]
+"values": [Vector2(-0.85, 0.85)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -216,8 +219,8 @@ _data = {
 size = Vector2(823.776, 237.763)
 
 [node name="StatPanel" type="Node2D"]
-scale = Vector2(0.715, 0.715)
-script = ExtResource("1_wtmpy")
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_y14vp")
 
 [node name="JsonHandle" parent="." instance=ExtResource("6_mygmc")]
 position = Vector2(-1, 1)
@@ -239,7 +242,7 @@ offset_top = 0.0
 offset_right = 980.0
 offset_bottom = 236.0
 scale = Vector2(-1, 1)
-SCALE_FACTOR = Vector2(-0.71, 0.705)
+SCALE_FACTOR = Vector2(-0.85, 0.85)
 
 [node name="Area2D" type="Area2D" parent="DragComponent2"]
 position = Vector2(1, 0)
@@ -274,7 +277,6 @@ offset_bottom = 232.0
 visible = false
 modulate = Color(0.762404, 0.762404, 0.762404, 1)
 position = Vector2(-129.447, 189.609)
-PortName = "COM3"
 
 [node name="Gas1" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
 offset_left = 393.629
@@ -282,7 +284,7 @@ offset_top = 2.19481
 offset_right = 559.629
 offset_bottom = 66.1948
 VSource = ExtResource("5_t2yaw")
-Name = "Gas1"
+Name = "CO"
 UnitName = "%"
 
 [node name="Humidity" parent="DragComponent2/Node/Container" instance=ExtResource("4_48ucf")]
@@ -327,10 +329,39 @@ offset_top = 2.19447
 offset_right = 696.692
 offset_bottom = 66.1945
 VSource = ExtResource("5_t2yaw")
-Name = "Gas2"
+Name = "NO2"
 UnitName = "%"
 
+[node name="Light" parent="DragComponent2/Node/Container" instance=ExtResource("12_pd45l")]
+offset_left = 666.357
+offset_top = 2.19412
+offset_right = 856.353
+offset_bottom = 179.194
+
+[node name="DataSlider" type="HSlider" parent="DragComponent2/Node/Container"]
+anchors_preset = -1
+anchor_left = 0.503038
+anchor_top = 0.497872
+anchor_right = 0.503038
+anchor_bottom = 0.497872
+offset_left = -152.294
+offset_top = 188.589
+offset_right = 664.026
+offset_bottom = 209.004
+size_flags_vertical = 8
+max_value = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Label" parent="DragComponent2/Node/Container/DataSlider"]
+layout_mode = 0
+offset_left = 30.5883
+offset_top = 19.9999
+offset_right = 428.588
+offset_bottom = 42.9999
+text = "Time:"
+
 [node name="ChartTemperature" type="Node2D" parent="DragComponent2/Node/Container"]
+visible = false
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="DragComponent2/Node/Container/ChartTemperature"]
 anchors_preset = -1
@@ -350,7 +381,7 @@ gui_disable_input = true
 size = Vector2i(788, 103)
 size_2d_override = Vector2i(1135, 80)
 size_2d_override_stretch = true
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="DataChart" parent="DragComponent2/Node/Container/ChartTemperature/SubViewportContainer/SubViewport" instance=ExtResource("8_coi6w")]
 scale = Vector2(9.09, 9.09)
@@ -360,31 +391,33 @@ position = Vector2(7626, 1306)
 offset = Vector2(-14.98, -158.195)
 zoom = Vector2(0.085, 0.098)
 
-[node name="DataSlider" type="HSlider" parent="DragComponent2/Node/Container"]
-anchors_preset = -1
-anchor_left = 0.503038
-anchor_top = 0.497872
-anchor_right = 0.503038
-anchor_bottom = 0.497872
-offset_left = -100.0
-offset_top = 167.231
-offset_right = -70.0
-offset_bottom = 199.191
-scale = Vector2(-1, 1)
-size_flags_vertical = 8
-max_value = 0.0
-metadata/_edit_use_anchors_ = true
+[node name="Chart2" parent="DragComponent2/Node/Container" instance=ExtResource("11_3jb0q")]
+position = Vector2(-152.294, 59.1769)
+scale = Vector2(0.375, 0.375)
 
-[node name="Light" parent="DragComponent2/Node/Container" instance=ExtResource("12_pd45l")]
-offset_left = 666.357
-offset_top = 2.19412
-offset_right = 856.353
-offset_bottom = 179.194
+[node name="ChartName" type="Label" parent="DragComponent2/Node/Container"]
+offset_left = -151.0
+offset_top = 164.0
+offset_right = 121.0
+offset_bottom = 187.0
+text = "Current chart: Temperature"
 
 [node name="StabilityState" type="Sprite2D" parent="DragComponent2/Node"]
-position = Vector2(806.217, 218.977)
+position = Vector2(-141.705, 220.353)
 scale = Vector2(0.263424, 0.263424)
 texture = ExtResource("11_8jnps")
+
+[node name="Imager" parent="DragComponent2" instance=ExtResource("13_11qdi")]
+position = Vector2(151.765, 164.706)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Sounder" parent="DragComponent2" instance=ExtResource("13_11qdi")]
+position = Vector2(150.588, 209.412)
+scale = Vector2(-1, 1)
+WorkMode = 1
+
+[node name="Math" parent="." instance=ExtResource("12_up08r")]
 
 [connection signal="start_load" from="JsonHandle" to="." method="_on_json_handle_start_load"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
@@ -393,10 +426,19 @@ texture = ExtResource("11_8jnps")
 [connection signal="mouse_entered" from="DragComponent2/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="DragComponent2/Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="PortChange" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_port_change"]
+[connection signal="TimestampRequest" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_timestamp_request"]
 [connection signal="WriteType_change" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_write_type_change"]
 [connection signal="maximize" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_maximize"]
 [connection signal="minimize" from="DragComponent2/Node/OptionPanel" to="." method="_on_option_panel_minimize"]
 [connection signal="OnError" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_error"]
+[connection signal="OnLackData" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_lack_data"]
 [connection signal="OnUpdate" from="DragComponent2/Node/Container/ArduinoReader" to="." method="_on_arduino_reader_on_update"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Gas1" to="." method="_on_gas_1_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Humidity" to="." method="_on_humidity_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Radiation" to="." method="_on_radiation_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Pressure" to="." method="_on_pressure_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Temperature" to="." method="_on_temperature_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Gas2" to="." method="_on_gas_2_pressed"]
+[connection signal="pressed" from="DragComponent2/Node/Container/Light" to="." method="_on_light_pressed"]
 [connection signal="changed" from="DragComponent2/Node/Container/DataSlider" to="." method="_on_data_slider_changed"]
 [connection signal="value_changed" from="DragComponent2/Node/Container/DataSlider" to="." method="_on_data_slider_value_changed"]

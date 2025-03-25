@@ -2,8 +2,8 @@
 extends Node3D
 
 @export_enum ("X axis", "Y axis", "Z axis", "Direction", "Skeleton") var color_preset : int
-var rotation_presets : Array[Vector3] = [ Vector3i(0,0,0), Vector3i(0,0,90), Vector3i(0,-90,0), Vector3i(0,0,0), Vector3i(0,0,0)]
-var color_presets : Array[Color] = [Color("875858", 1.0), Color("58875e", 1.0), Color("5b5887", 1.0), Color("f2d472", 1.0), Color(0,0,0, 1.0)]
+var rotation_presets : Array[Vector3] = [ Vector3i.ZERO, Vector3i(0,0,90), Vector3i(0,-90,0), Vector3i.ZERO, Vector3i.ZERO]
+var color_presets : Array[Color] = [Color("875858", 1.0), Color("58875e", 1.0), Color("5b5887", 1.0), Color("f2d472", 1.0), Color("aa9fa5", 1)]
 
 
 @export var width_radius : float = 0.5
@@ -12,7 +12,7 @@ var color_presets : Array[Color] = [Color("875858", 1.0), Color("58875e", 1.0), 
 var target : Vector3 = Vector3.ZERO:
 	set(val):
 		target = val
-		$Path3D.curve.set_point_position(1, val)
+		set_target(val)
 
 var rotation_override : Vector3 = Vector3.ZERO:
 	set(val):
@@ -38,10 +38,23 @@ func _ready() -> void:
 	$CSGPolygon3D.polygon = circle
 
 func setup():
-	var newcolor : StandardMaterial3D = StandardMaterial3D.new()
-	newcolor.albedo_color = color_presets[color_preset]
-	$CSGPolygon3D.material_override = newcolor
+	set_Color(color_presets[color_preset])
 	
 	length = 30
 	rotation_override = rotation_presets[color_preset]
 	$Path3D.rotation_degrees = rotation_override
+
+func set_target(pos : Vector3):
+	$Path3D.curve.set_point_position(1, pos)
+	if $Path3D.curve.get_point_position(1) == $Path3D.curve.get_point_position(0):
+		$Path3D.curve.set_point_position(1, Vector3(1,0,0))
+
+func set_base(pos : Vector3):
+	$Path3D.curve.set_point_position(0, pos)
+
+func set_Color(val : Color):
+	var newcolor : StandardMaterial3D = StandardMaterial3D.new()
+	newcolor.render_priority = 2
+	newcolor.transparency = newcolor.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
+	newcolor.albedo_color = val
+	$CSGPolygon3D.material_override = newcolor

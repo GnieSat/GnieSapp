@@ -102,7 +102,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_54shq")
 
 [node name="Sprite3D" type="Sprite3D" parent="Physical/CanSat"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.03, 0.874, 0)
+visible = false
 billboard = 2
+render_priority = 3
 texture = ExtResource("1_nt8u4")
 
 [node name="Label3D" type="Label3D" parent="Physical/CanSat"]
@@ -114,6 +116,8 @@ text = ".             Long:
 .             Speed:"
 horizontal_alignment = 0
 width = 1000.0
+
+[node name="TracePath" type="Node3D" parent="Physical"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_spdhi")
